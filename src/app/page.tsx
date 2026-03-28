@@ -7,7 +7,8 @@ import SectionHeading from '@/components/SectionHeading';
 import {
   BoltIcon, HouseIcon, ShieldIcon, LinkIcon, UnlockIcon,
   SunIcon, PlugIcon, ChartIcon, LockIcon,
-  MapPinIcon, WrenchIcon,
+  MapPinIcon, WrenchIcon, CameraIcon, CpuIcon, LayoutIcon,
+  DropletIcon, ThermometerIcon,
 } from '@/components/Icons';
 import { type ReactNode } from 'react';
 
@@ -28,6 +29,11 @@ const services: ServiceItem[] = [
   { icon: <ChartIcon size={28} />, title: 'Energiemanagement', description: 'Verbrauch, Erzeugung und Speicher in einem System sichtbar und steuerbar machen.', href: '/leistungen' },
   { icon: <HouseIcon size={28} />, title: 'Komfort-Automatisierung', description: 'Beleuchtung, Heizung, Rollläden und Szenen nach Ihren Wünschen automatisieren.', href: '/leistungen' },
   { icon: <LockIcon size={28} />, title: 'Sicherheitssysteme', description: 'Sensoren, Kameras und Alarme in ein einheitliches System integrieren.', href: '/leistungen' },
+  { icon: <ThermometerIcon size={28} />, title: 'Heizung & Klima', description: 'Heizungsautomation und Klimageräte-Integration für optimalen Komfort und Effizienz.', href: '/leistungen' },
+  { icon: <CameraIcon size={28} />, title: 'Videoüberwachung', description: 'IP-Kameras und Überwachungssysteme professionell in Home Assistant integrieren.', href: '/leistungen' },
+  { icon: <LayoutIcon size={28} />, title: 'Dashboard-Entwicklung', description: 'Individuelle Dashboards mit Lovelace Cards, responsive Layouts und Themes.', href: '/leistungen' },
+  { icon: <CpuIcon size={28} />, title: 'ESPHome & DIY-Sensorik', description: 'Eigene Firmware, MQTT-Anbindung und individuelle Sensorlösungen mit ESPHome.', href: '/leistungen' },
+  { icon: <DropletIcon size={28} />, title: 'Sensoren & Monitoring', description: 'Zisterne, Wasser-/Gaszähler, Smart Gardening und Umweltsensorik einbinden.', href: '/leistungen' },
 ];
 
 const processSteps = [
@@ -127,8 +133,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Energy Management Section */}
+      {/* Technologien & Standards */}
       <section className="py-20 sm:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="Unterstützte Technologien & Standards"
+            subtitle="Herstellerunabhängig — wir arbeiten mit allen gängigen Smart-Home-Systemen und offenen Standards."
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {([
+              { heading: 'Smart-Home-Protokolle', tags: ['Zigbee', 'Z-Wave', 'Matter', 'Thread', 'Bluetooth', 'WiFi', 'KNX', 'Modbus', '1-Wire'] },
+              { heading: 'Plattformen & Systeme', tags: ['Home Assistant', 'Raspberry Pi', 'Docker', 'Linux', 'MQTT', 'Node-RED', 'ESPHome', 'Tasmota'] },
+              { heading: 'Home Assistant Entwicklung', tags: ['Lovelace', 'HACS', 'Custom Cards', 'Blueprints', 'Templates', 'Jinja2', 'REST API', 'WebSocket'] },
+              { heading: 'Energie & Laden', tags: ['OCPP', 'evcc', 'SMA', 'Fronius', 'Victron', 'BMS', 'Shelly', 'SmartMeter'] },
+              { heading: 'Hersteller & Geräte', tags: ['Tuya', 'Philips Hue', 'Shelly', 'Sonoff', 'Aqara', 'IKEA', 'Xiaomi', 'TP-Link', 'Ubiquiti'] },
+              { heading: 'Entwicklung & Tools', tags: ['Python', 'JavaScript', 'YAML', 'Git', 'Grafana', 'InfluxDB'] },
+            ] as { heading: string; tags: string[] }[]).map((cat) => (
+              <div key={cat.heading}>
+                <h3 className="text-sm font-semibold text-white mb-3">{cat.heading}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {cat.tags.map((tag) => (
+                    <span key={tag} className="px-3 py-1 text-xs rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Energy Management Section */}
+      <section className="py-20 sm:py-28 bg-primary-dark/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Energie intelligent steuern"

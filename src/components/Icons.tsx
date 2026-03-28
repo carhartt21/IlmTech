@@ -231,3 +231,37 @@ export function InfoIcon(props: IconProps = {}) {
     'M12 8h.01',
   ]);
 }
+
+// Camera / Video
+export function CameraIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M23 7l-7 5 7 5V7z',
+    'M1 5h15a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H1V5z',
+  ]);
+}
+
+// CPU / Chip / ESPHome
+export function CpuIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z',
+    'M9 9h6v6H9z',
+    'M9 1v3', 'M15 1v3', 'M9 20v3', 'M15 20v3',
+    'M20 9h3', 'M20 14h3', 'M1 9h3', 'M1 14h3',
+  ]);
+}
+
+// Layout / Dashboard
+export function LayoutIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z',
+    'M2 9h20',
+    'M9 21V9',
+  ]);
+}
+
+// Droplet / Water sensor
+export function DropletIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
+  ]);
+}

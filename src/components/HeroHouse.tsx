@@ -14,62 +14,62 @@ interface HouseFeature {
   icon: ReactNode;
 }
 
-/* Positions mapped to the illustration icons (% of image dimensions) */
+/* Positions mapped to plausible house locations (% of image dimensions) */
 const features: HouseFeature[] = [
   {
     id: 'security',
     label: 'Sicherheit',
     description: 'Tür-, Fenster- und Bewegungssensoren vernetzen.',
-    x: 22,
-    y: 6,
+    x: 44,
+    y: 78,
     icon: <ShieldIcon size={16} />,
   },
   {
     id: 'light',
     label: 'Beleuchtung',
     description: 'Intelligente Lichtsteuerung für Komfort und Effizienz.',
-    x: 34,
-    y: 4,
+    x: 36,
+    y: 56,
     icon: <LightbulbIcon size={16} />,
   },
   {
     id: 'heating',
     label: 'Heizung',
     description: 'Adaptive Wärmesteuerung, abgestimmt auf Ihren Alltag.',
-    x: 11,
-    y: 30,
+    x: 53,
+    y: 56,
     icon: <ThermometerIcon size={16} />,
   },
   {
     id: 'energy',
     label: 'Energiemanagement',
     description: 'Verbrauch, PV-Ertrag und Speicher optimal balancieren.',
-    x: 3,
-    y: 54,
+    x: 44,
+    y: 42,
     icon: <BoltIcon size={16} />,
   },
   {
     id: 'appliances',
     label: 'Smart-Geräte',
     description: 'Haushaltsgeräte intelligent vernetzen und steuern.',
-    x: 38,
-    y: 38,
+    x: 36,
+    y: 74,
     icon: <WindowIcon size={16} />,
   },
   {
     id: 'pv',
     label: 'Photovoltaik',
     description: 'Eigenen Solarstrom erzeugen und intelligent nutzen.',
-    x: 24,
-    y: 35,
+    x: 50,
+    y: 38,
     icon: <SunIcon size={16} />,
   },
   {
     id: 'wallbox',
     label: 'Wallbox / EV',
     description: 'Elektroauto laden, wenn Solarstrom verfügbar ist.',
-    x: 42,
-    y: 72,
+    x: 72,
+    y: 80,
     icon: <PlugIcon size={16} />,
   },
 ];
@@ -79,7 +79,7 @@ export default function HeroHouse() {
   const activeFeature = features.find((f) => f.id === active);
 
   return (
-    <div className="relative w-full max-w-xl mx-auto" style={{ aspectRatio: '441 / 200' }}>
+    <div className="relative w-full max-w-xl mx-auto" style={{ aspectRatio: '270 / 200' }}>
       {/* Smart home illustration */}
       <Image
         src="/hero_smart_home.svg"
@@ -89,14 +89,14 @@ export default function HeroHouse() {
         priority
       />
 
-      {/* Interactive hotspots */}
+      {/* Interactive hotspots — icons always visible */}
       {features.map((f) => (
         <button
           key={f.id}
           className={`absolute w-9 h-9 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 ${
             active === f.id
-              ? 'bg-accent-blue/20 border border-accent-blue scale-125 shadow-[0_0_12px_rgba(0,212,255,0.4)]'
-              : 'bg-transparent border border-transparent hover:bg-accent-blue/10 hover:border-accent-blue/40 hover:scale-110'
+              ? 'bg-accent-blue/30 border border-accent-blue scale-125 shadow-[0_0_12px_rgba(0,212,255,0.4)]'
+              : 'bg-accent-blue/10 border border-accent-blue/50 hover:bg-accent-blue/20 hover:scale-110'
           }`}
           style={{ left: `${f.x}%`, top: `${f.y}%` }}
           onMouseEnter={() => setActive(f.id)}
@@ -104,7 +104,7 @@ export default function HeroHouse() {
           onClick={() => setActive(active === f.id ? null : f.id)}
           aria-label={f.label}
         >
-          <span className={`transition-opacity duration-300 ${active === f.id ? 'opacity-100' : 'opacity-0'}`}>
+          <span className="text-accent-blue">
             {f.icon}
           </span>
         </button>

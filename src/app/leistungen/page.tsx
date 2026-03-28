@@ -6,6 +6,7 @@ import CTAButton from '@/components/CTAButton';
 import {
   SunIcon, PlugIcon, ChartIcon, HouseIcon, LockIcon, WrenchIcon,
   UnlockIcon, LinkIcon, SmartphoneIcon, RefreshIcon, GlobeIcon,
+  ThermometerIcon, CameraIcon, LayoutIcon, CpuIcon, DropletIcon,
 } from '@/components/Icons';
 
 export const metadata: Metadata = {
@@ -70,6 +71,46 @@ const services: ServiceDetail[] = [
     title: 'Beratung, Installation & Support',
     description: 'Von der ersten Idee bis zur laufenden Betreuung begleiten wir Sie. Professionelle Installation vor Ort, individuelle Einweisung und fortlaufender Support.',
     features: ['Kostenlose Erstberatung', 'Individuelle Planung', 'Installation vor Ort', 'Updates und Erweiterungen'],
+  },
+  {
+    icon: <ThermometerIcon size={28} />,
+    image: '/images/smart-living-connected.jpg',
+    imageAlt: 'Smartes Thermostat an der Wand mit Temperaturanzeige',
+    title: 'Heizung & Klima',
+    description: 'Heizung und Klimageräte intelligent steuern — abgestimmt auf Tageszeit, Anwesenheit und Außentemperatur. Integration aller gängigen Thermostate und Klimaanlagen.',
+    features: ['Adaptive Temperatursteuerung', 'Raumweise Regelung', 'Klimageräte-Integration', 'Energieeinsparung durch Automation'],
+  },
+  {
+    icon: <CameraIcon size={28} />,
+    image: '/images/security-camera.jpg',
+    imageAlt: 'IP-Kamera zur Videoüberwachung am Haus',
+    title: 'Videoüberwachung',
+    description: 'IP-Kameras professionell einrichten und in Home Assistant integrieren. Live-Ansicht, Bewegungserkennung und Benachrichtigungen — alles in einem System.',
+    features: ['IP-Kamera-Integration', 'Bewegungserkennung', 'Aufzeichnung und Wiedergabe', 'Push-Benachrichtigungen'],
+  },
+  {
+    icon: <LayoutIcon size={28} />,
+    image: '/images/tablet-control.jpg',
+    imageAlt: 'Tablet mit individuellem Home-Assistant-Dashboard',
+    title: 'Dashboard-Entwicklung',
+    description: 'Individuelle Dashboards für Ihr Smart Home — übersichtlich, responsiv und auf Ihre Bedürfnisse zugeschnitten. Custom Lovelace Cards und Themes.',
+    features: ['Custom Lovelace Cards', 'Responsive Layouts', 'Theme-Entwicklung', 'Wandpanel-Optimierung'],
+  },
+  {
+    icon: <CpuIcon size={28} />,
+    image: '/images/smart-home-network.jpg',
+    imageAlt: 'ESP32-Mikrocontroller mit Sensoren und IoT-Geräten',
+    title: 'ESPHome & DIY-Sensorik',
+    description: 'Maßgeschneiderte Sensorlösungen mit ESPHome und ESP32-Mikrocontrollern. MQTT-Anbindung, eigene Firmware und individuelle Hardware-Projekte.',
+    features: ['ESPHome-Firmware', 'MQTT-Integration', 'Individuelle Sensorlösungen', 'Prototypen-Entwicklung'],
+  },
+  {
+    icon: <DropletIcon size={28} />,
+    image: '/images/smart-living-connected.jpg',
+    imageAlt: 'Garten mit smarter Bewässerung und Sensorik',
+    title: 'Sensoren & Monitoring',
+    description: 'Zisterne, Wasser- und Gaszähler, Bodenfeuchtigkeit und Luftqualität — alles zentral überwachen und automatisieren.',
+    features: ['Wasserverbrauchs-Monitoring', 'Smart Gardening', 'Luftqualitätssensoren', 'Benachrichtigungen bei Grenzwerten'],
   },
 ];
 
