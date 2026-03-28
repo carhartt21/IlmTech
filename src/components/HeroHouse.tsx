@@ -11,65 +11,61 @@ interface HouseFeature {
   description: string;
   x: number;
   y: number;
+  /** Connection target on the house (% coords) */
+  cx: number;
+  cy: number;
   icon: ReactNode;
 }
 
-/* Positions mapped to plausible house locations (% of image dimensions) */
+/* Icon positions spread around the house, each connecting to a logical point */
 const features: HouseFeature[] = [
   {
     id: 'security',
     label: 'Sicherheit',
     description: 'Tür-, Fenster- und Bewegungssensoren vernetzen.',
-    x: 44,
-    y: 78,
+    x: 34, y: 92, cx: 44, cy: 78,
     icon: <ShieldIcon size={16} />,
   },
   {
     id: 'light',
     label: 'Beleuchtung',
     description: 'Intelligente Lichtsteuerung für Komfort und Effizienz.',
-    x: 36,
-    y: 56,
+    x: 14, y: 50, cx: 30, cy: 54,
     icon: <LightbulbIcon size={16} />,
   },
   {
     id: 'heating',
     label: 'Heizung',
     description: 'Adaptive Wärmesteuerung, abgestimmt auf Ihren Alltag.',
-    x: 53,
-    y: 56,
+    x: 68, y: 44, cx: 56, cy: 52,
     icon: <ThermometerIcon size={16} />,
   },
   {
     id: 'energy',
     label: 'Energiemanagement',
     description: 'Verbrauch, PV-Ertrag und Speicher optimal balancieren.',
-    x: 44,
-    y: 42,
+    x: 36, y: 16, cx: 42, cy: 36,
     icon: <BoltIcon size={16} />,
   },
   {
     id: 'appliances',
     label: 'Smart-Geräte',
     description: 'Haushaltsgeräte intelligent vernetzen und steuern.',
-    x: 36,
-    y: 74,
+    x: 10, y: 76, cx: 28, cy: 74,
     icon: <WindowIcon size={16} />,
   },
   {
     id: 'pv',
     label: 'Photovoltaik',
     description: 'Eigenen Solarstrom erzeugen und intelligent nutzen.',
-    x: 50,
-    y: 38,
+    x: 58, y: 14, cx: 50, cy: 34,
     icon: <SunIcon size={16} />,
   },
   {
     id: 'wallbox',
     label: 'Wallbox / EV',
     description: 'Elektroauto laden, wenn Solarstrom verfügbar ist.',
-    x: 72,
-    y: 80,
+    x: 88, y: 74, cx: 74, cy: 78,
     icon: <PlugIcon size={16} />,
   },
 ];
@@ -88,6 +84,41 @@ export default function HeroHouse() {
         className="object-contain"
         priority
       />
+
+      {/* Animated connecting lines */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+        <defs>
+          <style>{`
+            @keyframes dashFlow {
+              to { stroke-dashoffset: -20; }
+            }
+          `}</style>
+        </defs>
+        {features.map((f) => (
+          <line
+            key={f.id}
+            x1={`${f.x}%`}
+            y1={`${f.y}%`}
+            x2={`${f.cx}%`}
+            y2={`${f.cy}%`}
+            stroke={active === f.id ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.2)'}
+            strokeWidth={active === f.id ? 2 : 1}
+            strokeDasharray="6 4"
+            style={{ animation: 'dashFlow 1.5s linear infinite', transition: 'stroke 0.3s, stroke-width 0.3s' }}
+          />
+        ))}
+        {/* Connection dots on the house */}
+        {features.map((f) => (
+          <circle
+            key={`dot-${f.id}`}
+            cx={`${f.cx}%`}
+            cy={`${f.cy}%`}
+            r="3"
+            fill={active === f.id ? 'rgba(0,212,255,0.8)' : 'rgba(0,212,255,0.3)'}
+            style={{ transition: 'fill 0.3s' }}
+          />
+        ))}
+      </svg>
 
       {/* Interactive hotspots — icons always visible */}
       {features.map((f) => (
