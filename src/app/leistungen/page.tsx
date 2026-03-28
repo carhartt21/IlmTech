@@ -90,8 +90,8 @@ const services: ServiceDetail[] = [
   },
   {
     icon: <LayoutIcon size={28} />,
-    image: '/images/tablet-control.jpg',
-    imageAlt: 'Tablet mit individuellem Home-Assistant-Dashboard',
+    image: '/images/dashboard.jpeg',
+    imageAlt: 'Home-Assistant-Dashboard mit Lichtszenen, Mediensteuerung und Klimakontrolle',
     title: 'Dashboard-Entwicklung',
     description: 'Individuelle Dashboards für Ihr Smart Home — übersichtlich, responsiv und auf Ihre Bedürfnisse zugeschnitten. Custom Lovelace Cards und Themes.',
     features: ['Custom Lovelace Cards', 'Responsive Layouts', 'Theme-Entwicklung', 'Wandpanel-Optimierung'],
@@ -106,7 +106,7 @@ const services: ServiceDetail[] = [
   },
   {
     icon: <DropletIcon size={28} />,
-    image: '/images/smart-living-connected.jpg',
+    image: '/images/garden_1.jpeg',
     imageAlt: 'Garten mit smarter Bewässerung und Sensorik',
     title: 'Sensoren & Monitoring',
     description: 'Zisterne, Wasser- und Gaszähler, Bodenfeuchtigkeit und Luftqualität — alles zentral überwachen und automatisieren.',
