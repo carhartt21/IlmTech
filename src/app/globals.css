@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b1121;
+  --foreground: #e8eaf0;
+  --primary: #1a2744;
+  --primary-dark: #0f1a30;
+  --accent-blue: #00d4ff;
+  --accent-orange: #f59e0b;
+  --accent-green: #22c55e;
+  --text-muted: #94a3b8;
+  --surface: #1e293b;
+  --surface-light: #263348;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-green: var(--accent-green);
+  --color-text-muted: var(--text-muted);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Glow effect for accent elements */
+.glow-blue {
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.glow-blue-box {
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2), 0 0 30px rgba(0, 212, 255, 0.1);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Energy flow animation */
+@keyframes flowRight {
+  0% { stroke-dashoffset: 20; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes flowLeft {
+  0% { stroke-dashoffset: -20; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.animate-flow-right {
+  animation: flowRight 1s linear infinite;
+  stroke-dasharray: 8 4;
+}
+.animate-flow-left {
+  animation: flowLeft 1s linear infinite;
+  stroke-dasharray: 8 4;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ─── Home Assistant-style energy dashboard ─── */
+@keyframes ha-dash {
+  0% { stroke-dashoffset: 28; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes ha-dash-reverse {
+  0% { stroke-dashoffset: -28; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes ha-pulse-dot {
+  0%, 100% { opacity: 0.4; r: 3; }
+  50% { opacity: 0.9; r: 5; }
+}
+@keyframes ha-ring-spin {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -999; }
+}
+.ha-flow {
+  animation: ha-dash 1.2s linear infinite;
+  stroke-dasharray: 6 8;
+}
+.ha-flow-reverse {
+  animation: ha-dash-reverse 1.2s linear infinite;
+  stroke-dasharray: 6 8;
+}
+.ha-pulse {
+  animation: ha-pulse-dot 2s ease-in-out infinite;
+}
+.ha-ring {
+  transition: stroke-dashoffset 1s ease;
 }
