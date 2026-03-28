@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SunIcon, LightbulbIcon, ThermometerIcon, ShieldIcon, PlugIcon, BoltIcon, WindowIcon } from './Icons';
+import { SunIcon, LightbulbIcon, ThermometerIcon, ShieldIcon, PlugIcon, BoltIcon, WindowIcon, LeafIcon } from './Icons';
 
 interface HouseFeature {
   id: string;
@@ -23,7 +23,7 @@ const features: HouseFeature[] = [
     id: 'security',
     label: 'Sicherheit',
     description: 'Tür-, Fenster- und Bewegungssensoren vernetzen.',
-    x: 34, y: 92, cx: 44, cy: 78,
+    x: 34, y: 88, cx: 44, cy: 78,
     icon: <ShieldIcon size={16} />,
   },
   {
@@ -68,6 +68,13 @@ const features: HouseFeature[] = [
     x: 88, y: 74, cx: 74, cy: 78,
     icon: <PlugIcon size={16} />,
   },
+  {
+    id: 'garden',
+    label: 'Garten & Outdoor',
+    description: 'Bewässerung, Mähroboter und Sensoren für den Außenbereich automatisieren.',
+    x: 52, y: 88, cx: 48, cy: 82,
+    icon: <LeafIcon size={16} />,
+  },
 ];
 
 export default function HeroHouse() {
@@ -75,7 +82,7 @@ export default function HeroHouse() {
   const activeFeature = features.find((f) => f.id === active);
 
   return (
-    <div className="relative w-full max-w-xl mx-auto" style={{ aspectRatio: '270 / 200' }}>
+    <div className="relative w-full max-w-xl mx-auto overflow-visible" style={{ aspectRatio: '270 / 200' }}>
       {/* Smart home illustration */}
       <Image
         src="/hero_smart_home.svg"
@@ -148,7 +155,7 @@ export default function HeroHouse() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-surface border border-white/10 rounded-lg px-4 py-3 max-w-xs text-center shadow-xl z-10"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-surface border border-white/10 rounded-lg px-4 py-3 max-w-xs text-center shadow-xl z-10 pointer-events-none"
           >
             <p className="text-sm font-semibold text-accent-blue">{activeFeature.label}</p>
             <p className="text-xs text-text-muted mt-1">{activeFeature.description}</p>

@@ -265,3 +265,43 @@ export function DropletIcon(props: IconProps = {}) {
     'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
   ]);
 }
+
+// Sprinkler / Garden irrigation
+export function SprinklerIcon(props: IconProps = {}) {
+  const { size = 24, className = '' } = { ...props };
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 22v-8" />
+      <path d="M8 22h8" />
+      <path d="M12 14c-4 0-7-2-7-5" />
+      <path d="M12 14c4 0 7-2 7-5" />
+      <path d="M5 9c-1.5-2 0-5 0-5" />
+      <path d="M19 9c1.5-2 0-5 0-5" />
+      <path d="M12 9V4" />
+      <circle cx="12" cy="3" r="1" />
+    </svg>
+  );
+}
+
+// Mowing robot / Lawn mower
+export function MowerIcon(props: IconProps = {}) {
+  const { size = 24, className = '' } = { ...props };
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="4" y="10" width="16" height="8" rx="3" />
+      <circle cx="8" cy="18" r="2" />
+      <circle cx="16" cy="18" r="2" />
+      <path d="M10 10V7c0-1.1.9-2 2-2s2 .9 2 2v3" />
+      <path d="M7 10l-2-4" />
+      <path d="M17 10l2-4" />
+    </svg>
+  );
+}
+
+// Leaf / Garden & Outdoor
+export function LeafIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.5 10-10 10Z',
+    'M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12',
+  ]);
+}
