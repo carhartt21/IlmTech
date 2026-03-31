@@ -42,10 +42,7 @@ body {
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.2), 0 0 30px rgba(0, 212, 255, 0.1);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scroll — handled via data-scroll-behavior attribute on <html> */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -89,11 +86,11 @@ html {
 
 /* ─── Home Assistant-style energy dashboard ─── */
 @keyframes ha-dash {
-  0% { stroke-dashoffset: 28; }
+  0% { stroke-dashoffset: 18; }
   100% { stroke-dashoffset: 0; }
 }
 @keyframes ha-dash-reverse {
-  0% { stroke-dashoffset: -28; }
+  0% { stroke-dashoffset: -18; }
   100% { stroke-dashoffset: 0; }
 }
 @keyframes ha-pulse-dot {
@@ -106,11 +103,11 @@ html {
 }
 .ha-flow {
   animation: ha-dash 1.2s linear infinite;
-  stroke-dasharray: 6 8;
+  stroke-dasharray: 8 10;
 }
 .ha-flow-reverse {
   animation: ha-dash-reverse 1.2s linear infinite;
-  stroke-dasharray: 6 8;
+  stroke-dasharray: 8 10;
 }
 .ha-pulse {
   animation: ha-pulse-dot 2s ease-in-out infinite;
