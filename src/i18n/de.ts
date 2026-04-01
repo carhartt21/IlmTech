@@ -614,6 +614,14 @@ const de = {
     chat: { label: 'Chat Interface', description: 'Kommunikation' },
     knowledge: { label: 'Knowledge Base', description: 'Wissens- & Daten' },
   },
+  aiPillarsHub: {
+    nodes: {
+      agent: { label: 'KI-Agent', description: 'Intelligenter Assistent für Ihr Smart Home — versteht Kontext und handelt proaktiv.' },
+      workflow: { label: 'Workflow', description: 'Geschäftsprozesse mit n8n und KI automatisieren — von der Anfrage bis zur Rechnung.' },
+      infrastructure: { label: 'Infrastruktur', description: 'Private KI-Server mit Ollama, RAG und Dokumentenanalyse — DSGVO-konform.' },
+      consulting: { label: 'Beratung', description: 'Vom Readiness-Check über die KI-Strategie bis zum Proof of Concept.' },
+    },
+  },
 } satisfies Record<string, unknown>;
 
 export type Dictionary = typeof de;

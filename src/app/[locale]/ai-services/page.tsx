@@ -10,6 +10,7 @@ import {
 } from '@/components/Icons';
 import { locales, getDictionary, type Locale } from '@/i18n/config';
 import type { ReactNode } from 'react';
+import AIPillarsHub from '@/components/AIPillarsHub';
 
 const pillarIcons: ReactNode[] = [
   <BrainIcon key="brain" size={32} />,
@@ -55,10 +56,15 @@ export default async function AIServices({ params }: { params: Promise<{ locale:
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent-blue/5 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-white">{t.hero.title}</h1>
-            <p className="mt-4 text-lg text-text-muted max-w-xl mx-auto">{t.hero.subtitle}</p>
-            <p className="mt-6 text-text-muted max-w-xl mx-auto">{t.intro}</p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl sm:text-5xl font-bold text-white">{t.hero.title}</h1>
+              <p className="mt-4 text-lg text-text-muted max-w-xl mx-auto lg:mx-0">{t.hero.subtitle}</p>
+              <p className="mt-6 text-text-muted max-w-xl mx-auto lg:mx-0">{t.intro}</p>
+            </div>
+            <div>
+              <AIPillarsHub />
+            </div>
           </div>
         </div>
       </section>

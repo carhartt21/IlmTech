@@ -616,6 +616,14 @@ const en: Dictionary = {
     chat: { label: 'Chat Interface', description: 'Communication Channels' },
     knowledge: { label: 'Knowledge Base', description: 'Knowledge & Data Layer' },
   },
+  aiPillarsHub: {
+    nodes: {
+      agent: { label: 'AI Agent', description: 'Intelligent assistant for your smart home — understands context and acts proactively.' },
+      workflow: { label: 'Workflow', description: 'Automate business processes with n8n and AI — from inquiry to invoice.' },
+      infrastructure: { label: 'Infrastructure', description: 'Private AI servers with Ollama, RAG and document analysis — GDPR-compliant.' },
+      consulting: { label: 'Consulting', description: 'From readiness check to AI strategy and proof of concept.' },
+    },
+  },
 } satisfies Record<string, unknown>;
 
 export default en;
