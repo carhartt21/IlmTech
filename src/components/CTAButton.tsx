@@ -5,9 +5,11 @@ interface CTAButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-export default function CTAButton({ href, children, variant = 'primary', className = '' }: CTAButtonProps) {
+export default function CTAButton({ href, children, variant = 'primary', className = '', onMouseEnter, onMouseLeave }: CTAButtonProps) {
   const base = 'inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200';
   const variants = {
     primary: 'bg-accent-blue text-primary-dark hover:bg-accent-blue/90 shadow-lg shadow-accent-blue/20',
@@ -15,7 +17,7 @@ export default function CTAButton({ href, children, variant = 'primary', classNa
   };
 
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <Link href={href} className={`${base} ${variants[variant]} ${className}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {children}
     </Link>
   );

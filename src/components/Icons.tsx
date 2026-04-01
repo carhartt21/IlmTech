@@ -305,3 +305,56 @@ export function LeafIcon(props: IconProps = {}) {
     'M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12',
   ]);
 }
+
+// Brain / AI
+export function BrainIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M12 2a6 6 0 0 0-6 6c0 1.66.68 3.16 1.76 4.24L12 16l4.24-3.76A6 6 0 0 0 12 2z',
+    'M12 16v6',
+    'M8 22h8',
+    'M9 8h.01',
+    'M15 8h.01',
+    'M10 11h4',
+  ]);
+}
+
+// Workflow / Process
+export function WorkflowIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M3 6h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z',
+    'M10 14h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z',
+    'M17 6h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z',
+    'M5 10v2a2 2 0 0 0 2 2h2',
+    'M19 10v2a2 2 0 0 1-2 2h-2',
+  ]);
+}
+
+// Server / Infrastructure
+export function ServerIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M2 4h20a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z',
+    'M2 14h20a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z',
+    'M6 7h.01',
+    'M6 17h.01',
+  ]);
+}
+
+// Compass / Consulting
+export function CompassIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z',
+    'M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z',
+  ]);
+}
+
+// MessageCircle / Chat
+export function MessageCircleIcon(props: IconProps = {}) {
+  return wrap(props, [
+    'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
+  ]);
+}
+
+// ChevronDown
+export function ChevronDownIcon(props: IconProps = {}) {
+  return wrap(props, ['M6 9l6 6 6-6']);
+}
