@@ -11,17 +11,23 @@
 \RequirePackage{microtype}
 
 %% ── Colors ──────────────────────────────────────────────────
+% Primary
 \definecolor{ilm-blue}{HTML}{00D4FF}
 \definecolor{ilm-dark}{HTML}{0F1A30}
 \definecolor{ilm-bg}{HTML}{0B1121}
+% Secondary
+\definecolor{ilm-orange}{HTML}{F59E0B}
+\definecolor{ilm-green}{HTML}{22C55E}
+\definecolor{ilm-purple}{HTML}{A855F7}
+% Neutrals
+\definecolor{ilm-foreground}{HTML}{E8EAF0}
 \definecolor{ilm-muted}{HTML}{94A3B8}
 \definecolor{ilm-surface}{HTML}{1E293B}
 \definecolor{ilm-surface-light}{HTML}{263348}
-\definecolor{ilm-orange}{HTML}{F59E0B}
-\definecolor{ilm-green}{HTML}{22C55E}
+\definecolor{ilm-primary}{HTML}{1A2744}
 
 %% Beamer colour assignments
-\setbeamercolor{normal text}{fg=white, bg=ilm-bg}
+\setbeamercolor{normal text}{fg=ilm-foreground, bg=ilm-bg}
 \setbeamercolor{alerted text}{fg=ilm-orange}
 \setbeamercolor{example text}{fg=ilm-green}
 \setbeamercolor{structure}{fg=ilm-blue}
@@ -29,6 +35,7 @@
 \setbeamercolor{palette primary}{fg=white, bg=ilm-dark}
 \setbeamercolor{palette secondary}{fg=white, bg=ilm-surface}
 \setbeamercolor{palette tertiary}{fg=white, bg=ilm-blue}
+\setbeamercolor{palette quaternary}{fg=white, bg=ilm-purple}
 
 \setbeamercolor{frametitle}{fg=white, bg=}
 \setbeamercolor{framesubtitle}{fg=ilm-muted}
@@ -39,16 +46,21 @@
 \setbeamercolor{institute}{fg=ilm-muted}
 
 \setbeamercolor{block title}{fg=white, bg=ilm-surface}
-\setbeamercolor{block body}{fg=white, bg=ilm-surface-light}
+\setbeamercolor{block body}{fg=ilm-foreground, bg=ilm-surface-light}
 \setbeamercolor{block title alerted}{fg=white, bg=ilm-orange!80!black}
-\setbeamercolor{block body alerted}{fg=white, bg=ilm-surface-light}
+\setbeamercolor{block body alerted}{fg=ilm-foreground, bg=ilm-surface-light}
 \setbeamercolor{block title example}{fg=white, bg=ilm-green!70!black}
-\setbeamercolor{block body example}{fg=white, bg=ilm-surface-light}
+\setbeamercolor{block body example}{fg=ilm-foreground, bg=ilm-surface-light}
 
 \setbeamercolor{itemize item}{fg=ilm-blue}
 \setbeamercolor{itemize subitem}{fg=ilm-blue!70}
 \setbeamercolor{enumerate item}{fg=ilm-blue}
+\setbeamercolor{enumerate subitem}{fg=ilm-blue!70}
+\setbeamercolor{description item}{fg=ilm-blue}
 \setbeamercolor{footline}{fg=ilm-muted, bg=ilm-dark}
+\setbeamercolor{bibliography entry author}{fg=ilm-foreground}
+\setbeamercolor{bibliography entry title}{fg=ilm-blue}
+\setbeamercolor{bibliography entry note}{fg=ilm-muted}
 
 %% ── Fonts ───────────────────────────────────────────────────
 \setbeamerfont{title}{size=\Large, series=\bfseries}

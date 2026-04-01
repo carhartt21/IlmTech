@@ -32,14 +32,21 @@
 \RequirePackage{lastpage}
 \RequirePackage{tikz}
 
-%% ── IlmTech Colors ─────────────────────────────────────────
+%% ── IlmTech Colors (Corporate Design) ────────────────────
+% Primary
 \definecolor{ilm-blue}{HTML}{00D4FF}
 \definecolor{ilm-dark}{HTML}{0F1A30}
 \definecolor{ilm-bg}{HTML}{0B1121}
-\definecolor{ilm-muted}{HTML}{94A3B8}
-\definecolor{ilm-surface}{HTML}{1E293B}
+% Secondary
 \definecolor{ilm-orange}{HTML}{F59E0B}
 \definecolor{ilm-green}{HTML}{22C55E}
+\definecolor{ilm-purple}{HTML}{A855F7}
+% Neutrals
+\definecolor{ilm-foreground}{HTML}{E8EAF0}
+\definecolor{ilm-muted}{HTML}{94A3B8}
+\definecolor{ilm-surface}{HTML}{1E293B}
+\definecolor{ilm-surface-light}{HTML}{263348}
+\definecolor{ilm-primary}{HTML}{1A2744}
 
 %% ── Page Geometry ───────────────────────────────────────────
 \geometry{
@@ -54,7 +61,7 @@
 \hypersetup{
   colorlinks=true,
   linkcolor=ilm-dark,
-  urlcolor=ilm-blue,
+  urlcolor=ilm-blue!80!black,
   citecolor=ilm-dark,
   pdfauthor={IlmTech — Christoph Gerhardt},
   pdfcreator={IlmTech LaTeX Template},
@@ -107,14 +114,22 @@
   }%
 }
 
-%% ── Accent decoration (thin blue line below header) ─────────
+%% ── Accent decoration ───────────────────────────────────────
 \AddToHook{shipout/foreground}{%
   \begin{tikzpicture}[remember picture, overlay]
+    % Accent blue line below header
     \draw[ilm-blue, line width=0.6pt]
       ([yshift=-27mm, xshift=25mm]current page.north west) --
       ([yshift=-27mm, xshift=-25mm]current page.north east);
+    % Subtle footer separator
+    \draw[ilm-muted!30, line width=0.3pt]
+      ([yshift=18mm, xshift=25mm]current page.south west) --
+      ([yshift=18mm, xshift=-25mm]current page.south east);
   \end{tikzpicture}%
 }
+
+%% ── Subject line color ──────────────────────────────────────
+\setkomafont{subject}{\bfseries\color{ilm-dark}}
 
 %% ── Letter opening/closing styling ─────────────────────────
 \renewcommand*{\raggedsignature}{\raggedright}
