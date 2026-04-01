@@ -1,0 +1,19 @@
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.nav
+*.snm
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.bbl
+*.blg
+
+# Compiled PDFs (rebuild with: make all)
+letter/*.pdf
+beamer/*.pdf
+
+# Keep the logo
+!logo.pdf

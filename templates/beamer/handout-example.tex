@@ -1,0 +1,71 @@
+%% IlmTech — Handout Example (2-up on A4)
+%% Compile with: lualatex handout-example.tex
+\documentclass[aspectratio=169, handout]{beamer}
+\usetheme{ilmtech}
+
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+
+%% Reuse the same content as the presentation
+\title{Intelligente Lösungen für\\Ihr Zuhause und Unternehmen}
+\subtitle{Smart Home · KI · Automation}
+\author{Christoph Gerhardt · IlmTech}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Agenda}
+  \tableofcontents
+\end{frame}
+
+\section{Smart Home \& Energie}
+
+\begin{frame}{Smart Home \& Energie}
+  \framesubtitle{Intelligente Gebäudeautomation}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \begin{itemize}
+        \item Ganzheitliche Smart-Home-Planung
+        \item KNX / Zigbee / Matter Integration
+        \item PV, Speicher \& Wallbox Management
+        \item Energiemonitoring in Echtzeit
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{block}{Vorteile}
+        Bis zu \alert{30\%} Energieeinsparung durch intelligente Steuerung.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{KI \& Automation}
+
+\begin{frame}{Lokale KI-Agenten}
+  \framesubtitle{Private, DSGVO-konforme Assistenten}
+  \begin{enumerate}
+    \item \textbf{Home AI Agent} — Kontextbewusster Smart-Home-Assistent
+    \item \textbf{Workflow-Automation} — End-to-End-Prozesse
+    \item \textbf{Infrastruktur} — Lokale Server mit Ollama und RAG
+    \item \textbf{Beratung} — Readiness-Check bis Proof of Concept
+  \end{enumerate}
+\end{frame}
+
+\section{Warum IlmTech?}
+
+\begin{frame}{Unsere Stärken}
+  \begin{itemize}
+    \item \textcolor{ilm-blue}{\textbf{Lokal}} — Persönlicher Ansprechpartner
+    \item \textcolor{ilm-blue}{\textbf{Maßgeschneidert}} — Keine Standardlösungen
+    \item \textcolor{ilm-blue}{\textbf{Datenschutz}} — DSGVO-konform
+    \item \textcolor{ilm-blue}{\textbf{Zukunftssicher}} — Offene Standards
+  \end{itemize}
+\end{frame}
+
+\thankyouframe
+
+\end{document}

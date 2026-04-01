@@ -1,0 +1,190 @@
+%% beamerthemeilmtech.sty — IlmTech Beamer Theme
+%% A clean, modern dark theme matching IlmTech's web presence.
+\ProvidesPackage{beamerthemeilmtech}[2025/03/31 IlmTech Beamer Theme]
+
+\mode<presentation>
+
+%% ── Dependencies ────────────────────────────────────────────
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{fontspec}       % LuaLaTeX / XeLaTeX
+\RequirePackage{microtype}
+
+%% ── Colors ──────────────────────────────────────────────────
+\definecolor{ilm-blue}{HTML}{00D4FF}
+\definecolor{ilm-dark}{HTML}{0F1A30}
+\definecolor{ilm-bg}{HTML}{0B1121}
+\definecolor{ilm-muted}{HTML}{94A3B8}
+\definecolor{ilm-surface}{HTML}{1E293B}
+\definecolor{ilm-surface-light}{HTML}{263348}
+\definecolor{ilm-orange}{HTML}{F59E0B}
+\definecolor{ilm-green}{HTML}{22C55E}
+
+%% Beamer colour assignments
+\setbeamercolor{normal text}{fg=white, bg=ilm-bg}
+\setbeamercolor{alerted text}{fg=ilm-orange}
+\setbeamercolor{example text}{fg=ilm-green}
+\setbeamercolor{structure}{fg=ilm-blue}
+
+\setbeamercolor{palette primary}{fg=white, bg=ilm-dark}
+\setbeamercolor{palette secondary}{fg=white, bg=ilm-surface}
+\setbeamercolor{palette tertiary}{fg=white, bg=ilm-blue}
+
+\setbeamercolor{frametitle}{fg=white, bg=}
+\setbeamercolor{framesubtitle}{fg=ilm-muted}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=ilm-muted}
+\setbeamercolor{author}{fg=ilm-muted}
+\setbeamercolor{date}{fg=ilm-muted}
+\setbeamercolor{institute}{fg=ilm-muted}
+
+\setbeamercolor{block title}{fg=white, bg=ilm-surface}
+\setbeamercolor{block body}{fg=white, bg=ilm-surface-light}
+\setbeamercolor{block title alerted}{fg=white, bg=ilm-orange!80!black}
+\setbeamercolor{block body alerted}{fg=white, bg=ilm-surface-light}
+\setbeamercolor{block title example}{fg=white, bg=ilm-green!70!black}
+\setbeamercolor{block body example}{fg=white, bg=ilm-surface-light}
+
+\setbeamercolor{itemize item}{fg=ilm-blue}
+\setbeamercolor{itemize subitem}{fg=ilm-blue!70}
+\setbeamercolor{enumerate item}{fg=ilm-blue}
+\setbeamercolor{footline}{fg=ilm-muted, bg=ilm-dark}
+
+%% ── Fonts ───────────────────────────────────────────────────
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{footline}{size=\tiny}
+
+%% ── Try to load Inter font ──────────────────────────────────
+\IfFontExistsTF{Inter}{%
+  \setsansfont{Inter}[
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+  ]
+}{}
+
+%% ── Inner Theme ─────────────────────────────────────────────
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{sections/subsections in toc}[circle]
+\setbeamertemplate{navigation symbols}{}          % remove nav buttons
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+%% ── Title Page ──────────────────────────────────────────────
+\newcommand{\ilmtechlogopath}{../logo.pdf}
+
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    % Background gradient
+    \fill[ilm-bg]
+      (current page.south west) rectangle (current page.north east);
+    % Subtle accent glow
+    \fill[ilm-blue, opacity=0.06]
+      ([shift={(4cm,-2cm)}]current page.north east) circle (8cm);
+    % Top accent bar
+    \fill[ilm-blue]
+      ([yshift=-1mm]current page.north west) rectangle ([yshift=-3mm]current page.north east);
+  \end{tikzpicture}%
+  \vspace{1cm}%
+  {%
+    % Logo + wordmark
+    \begin{minipage}[c]{0.5\textwidth}
+      \IfFileExists{\ilmtechlogopath}{%
+        \includegraphics[height=16mm]{\ilmtechlogopath}\hspace{6pt}%
+      }{}%
+      {\fontsize{20}{24}\selectfont\bfseries
+        \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
+      }%
+    \end{minipage}%
+  }\\[1.5cm]
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \ifx\insertsubtitle\empty\else
+    \vspace{4pt}%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \fi
+  \vspace{0.8cm}%
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \vspace{4pt}%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+}
+
+%% ── Frame Title ─────────────────────────────────────────────
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \vspace{6pt}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \ifx\insertframesubtitle\empty\else
+    \vspace{2pt}%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+  \fi
+  \vspace{2pt}%
+  \begin{tikzpicture}
+    \draw[ilm-blue, line width=0.5pt] (0,0) -- (\textwidth,0);
+  \end{tikzpicture}%
+  \vspace{4pt}%
+}
+
+%% ── Footline ────────────────────────────────────────────────
+\setbeamertemplate{footline}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[ilm-dark]
+      (current page.south west) rectangle ([yshift=6mm]current page.south east);
+    \draw[ilm-blue!40, line width=0.3pt]
+      ([yshift=6mm]current page.south west) -- ([yshift=6mm]current page.south east);
+    \node[anchor=south west, inner sep=0pt, font=\tiny, text=ilm-muted]
+      at ([xshift=8mm, yshift=1.5mm]current page.south west)
+      {IlmTech · Christoph Gerhardt · www.ilmtech.de};
+    \node[anchor=south east, inner sep=0pt, font=\tiny, text=ilm-muted]
+      at ([xshift=-8mm, yshift=1.5mm]current page.south east)
+      {\insertframenumber\,/\,\inserttotalframenumber};
+  \end{tikzpicture}%
+}
+
+%% ── Section Pages ───────────────────────────────────────────
+\AtBeginSection[]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+      \fill[ilm-bg]
+        (current page.south west) rectangle (current page.north east);
+      \fill[ilm-blue, opacity=0.08]
+        ([shift={(-2cm,1cm)}]current page.center) circle (6cm);
+      \fill[ilm-blue]
+        ([yshift=-1mm]current page.north west) rectangle ([yshift=-3mm]current page.north east);
+    \end{tikzpicture}%
+    \vfill
+    \centering
+    {\fontsize{10}{14}\selectfont\textcolor{ilm-blue}{%
+      \MakeUppercase{\insertsectionnumber}%
+    }}\\[4pt]
+    {\fontsize{22}{28}\selectfont\bfseries\textcolor{white}{\insertsection}}%
+    \vfill
+  \end{frame}
+}
+
+%% ── Closing / Thank-you macro ───────────────────────────────
+\newcommand{\thankyouframe}[1][Vielen Dank!]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+      \fill[ilm-bg]
+        (current page.south west) rectangle (current page.north east);
+      \fill[ilm-blue, opacity=0.06]
+        (current page.center) circle (7cm);
+      \fill[ilm-blue]
+        ([yshift=-1mm]current page.north west) rectangle ([yshift=-3mm]current page.north east);
+    \end{tikzpicture}%
+    \vfill
+    \centering
+    {\fontsize{26}{32}\selectfont\bfseries\textcolor{white}{#1}}\\[1cm]
+    {\small\textcolor{ilm-muted}{%
+      info@ilmtech.de · www.ilmtech.de%
+    }}%
+    \vfill
+  \end{frame}
+}
+
+\mode<all>
+\endinput

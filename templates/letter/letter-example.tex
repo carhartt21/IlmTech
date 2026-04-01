@@ -1,0 +1,48 @@
+%% IlmTech — Letter Example
+%% Compile with: lualatex letter-example.tex (or pdflatex)
+\documentclass{ilmtech-letter}
+
+% ── Optionally override logo path ──
+% \renewcommand{\ilmtechlogopath}{path/to/IlmTech_original.pdf}
+
+% ── Letter date ──
+\setkomavar{date}{\today}
+
+% ── Subject ──
+\setkomavar{subject}{Betreff der Nachricht}
+
+\begin{document}
+
+\begin{letter}{%
+  Max Mustermann\\
+  Musterstraße 42\\
+  99084 Erfurt\\
+  Deutschland%
+}
+
+\opening{Sehr geehrter Herr Mustermann,}
+
+vielen Dank für Ihre Anfrage bezüglich unserer Smart-Home-Lösungen. Wir freuen uns
+über Ihr Interesse an unseren Dienstleistungen und möchten Ihnen gerne ein individuelles
+Angebot erstellen.
+
+Unsere Leistungen umfassen unter anderem:
+\begin{itemize}
+  \item \textbf{Smart Home \& Energie} — Intelligente Gebäudeautomation, Energiemanagement
+        und Wallbox-Integration
+  \item \textbf{KI \& Automation} — Lokale KI-Agenten, Workflow-Automatisierung und
+        DSGVO-konforme Infrastruktur
+  \item \textbf{Beratung} — Vom Readiness-Check über die KI-Strategie bis zum Proof of Concept
+\end{itemize}
+
+Gerne vereinbaren wir einen Termin für ein unverbindliches Erstgespräch, in dem wir Ihre
+Anforderungen im Detail besprechen können.
+
+\closing{Mit freundlichen Grüßen}
+
+% \encl{Anlage 1\\Preisliste 2025}
+% \cc{Kopie an: Frau Beispiel}
+
+\end{letter}
+
+\end{document}

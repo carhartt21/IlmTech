@@ -1,0 +1,124 @@
+%% IlmTech — Presentation Example
+%% Compile with: lualatex presentation-example.tex
+\documentclass[aspectratio=169]{beamer}
+\usetheme{ilmtech}
+
+% ── For handout mode, uncomment the line below ──
+% \documentclass[aspectratio=169, handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+
+% ── Optionally override logo path ──
+% \renewcommand{\ilmtechlogopath}{path/to/IlmTech_original.pdf}
+
+%% ── Metadata ────────────────────────────────────────────────
+\title{Intelligente Lösungen für\\Ihr Zuhause und Unternehmen}
+\subtitle{Smart Home · KI · Automation}
+\author{Christoph Gerhardt · IlmTech}
+\date{\today}
+
+\begin{document}
+
+% ─── Title ───────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ─── Agenda ──────────────────────────────────────────────────
+\begin{frame}{Agenda}
+  \tableofcontents
+\end{frame}
+
+% ━━━━ Section 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\section{Smart Home \& Energie}
+
+\begin{frame}{Smart Home \& Energie}
+  \framesubtitle{Intelligente Gebäudeautomation}
+
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \begin{itemize}
+        \item Ganzheitliche Smart-Home-Planung
+        \item KNX / Zigbee / Matter Integration
+        \item PV, Speicher \& Wallbox Management
+        \item Energiemonitoring in Echtzeit
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{block}{Vorteile}
+        Bis zu \alert{30\%} Energieeinsparung durch intelligente Steuerung und Automatisierung.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ━━━━ Section 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\section{KI \& Automation}
+
+\begin{frame}{Lokale KI-Agenten}
+  \framesubtitle{Private, DSGVO-konforme Assistenten}
+
+  \begin{enumerate}
+    \item \textbf{Home AI Agent} — Kontextbewusster Assistent für Ihr Smart Home
+    \item \textbf{Workflow-Automation} — End-to-End-Prozesse mit n8n und KI
+    \item \textbf{Infrastruktur} — Lokale Server mit Ollama, RAG und Dokumentenanalyse
+    \item \textbf{Beratung} — Vom Readiness-Check zum Proof of Concept
+  \end{enumerate}
+
+  \vspace{0.5cm}
+  \begin{exampleblock}{Datenschutz}
+    Alle Daten verbleiben auf Ihrem lokalen Server — keine Cloud, kein Datenabfluss.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Workflow-Automatisierung}
+  \framesubtitle{Von der Anfrage bis zur Rechnung}
+
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Eingehende Anfragen}
+        \begin{itemize}
+          \item E-Mail-Klassifizierung
+          \item Automatische Kategorisierung
+          \item Ticket-Erstellung
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Verarbeitung}
+        \begin{itemize}
+          \item KI-gestützte Textanalyse
+          \item Dokumentengenerierung
+          \item Automatisierte Freigaben
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ━━━━ Section 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\section{Warum IlmTech?}
+
+\begin{frame}{Unsere Stärken}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+        \item \textcolor{ilm-blue}{\textbf{Lokal}} — Persönlicher Ansprechpartner in Thüringen
+        \item \textcolor{ilm-blue}{\textbf{Maßgeschneidert}} — Keine Standardlösungen
+        \item \textcolor{ilm-blue}{\textbf{Datenschutz}} — DSGVO-konform, keine Cloud
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+        \item \textcolor{ilm-blue}{\textbf{Zukunftssicher}} — Offene Standards
+        \item \textcolor{ilm-blue}{\textbf{Herstellerunabhängig}} — Freie Wahl der Technik
+        \item \textcolor{ilm-blue}{\textbf{Ganzheitlich}} — Von der Beratung bis zum Betrieb
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ─── Thank You ───────────────────────────────────────────────
+\thankyouframe
+
+\end{document}
