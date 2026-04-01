@@ -1,0 +1,496 @@
+%% IlmTech — Corporate Design Manual
+%% Compile with: lualatex corporate-design.tex
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{calc}
+
+\usetikzlibrary{calc}
+
+%% ── Geometry ────────────────────────────────────────────────
+\geometry{
+  a4paper,
+  left=30mm,
+  right=30mm,
+  top=35mm,
+  bottom=30mm,
+}
+
+%% ── IlmTech Colors ─────────────────────────────────────────
+% Primary
+\definecolor{ilm-blue}{HTML}{00D4FF}
+\definecolor{ilm-dark}{HTML}{0F1A30}
+\definecolor{ilm-bg}{HTML}{0B1121}
+
+% Secondary
+\definecolor{ilm-orange}{HTML}{F59E0B}
+\definecolor{ilm-green}{HTML}{22C55E}
+\definecolor{ilm-purple}{HTML}{A855F7}
+
+% Neutrals
+\definecolor{ilm-foreground}{HTML}{E8EAF0}
+\definecolor{ilm-muted}{HTML}{94A3B8}
+\definecolor{ilm-surface}{HTML}{1E293B}
+\definecolor{ilm-surface-light}{HTML}{263348}
+\definecolor{ilm-primary}{HTML}{1A2744}
+
+% Print-friendly light variants
+\definecolor{ilm-light-bg}{HTML}{F8FAFC}
+\definecolor{ilm-light-text}{HTML}{1E293B}
+
+%% ── Fonts ───────────────────────────────────────────────────
+\IfFontExistsTF{Inter}{%
+  \setmainfont{Inter}[
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+  ]
+  \setsansfont{Inter}[
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+  ]
+}{}
+
+%% ── Hyperref ────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ilm-blue!80!black,
+  urlcolor=ilm-blue!80!black,
+  pdftitle={IlmTech Corporate Design Manual},
+  pdfauthor={IlmTech},
+}
+
+%% ── Helper macros ───────────────────────────────────────────
+% Color swatch
+\newcommand{\colorswatch}[4][1.2cm]{%
+  % #1 = swatch size, #2 = color name, #3 = display name, #4 = hex code
+  \begin{tikzpicture}[baseline=-0.5ex]
+    \fill[#2, rounded corners=3pt] (0,0) rectangle (#1,#1);
+    \draw[black!20, rounded corners=3pt] (0,0) rectangle (#1,#1);
+  \end{tikzpicture}\hspace{6pt}%
+  \begin{minipage}[b]{4.5cm}
+    \textbf{#3}\\[2pt]
+    {\small\texttt{#4}}
+  \end{minipage}%
+}
+
+% Section accent bar
+\newcommand{\sectionbar}{%
+  \vspace{4pt}%
+  \begin{tikzpicture}
+    \fill[ilm-blue] (0,0) rectangle (3cm, 2pt);
+  \end{tikzpicture}%
+  \par\vspace{8pt}%
+}
+
+%% ── Document ────────────────────────────────────────────────
+\begin{document}
+
+% ─── Cover Page ──────────────────────────────────────────────
+\begin{titlepage}
+  \begin{tikzpicture}[remember picture, overlay]
+    % Dark background
+    \fill[ilm-bg] (current page.south west) rectangle (current page.north east);
+    % Subtle glow
+    \fill[ilm-blue, opacity=0.06]
+      ([shift={(3cm,-4cm)}]current page.north east) circle (10cm);
+    % Accent bar at top
+    \fill[ilm-blue]
+      ([yshift=-2mm]current page.north west) rectangle ([yshift=-5mm]current page.north east);
+    % Bottom accent
+    \fill[ilm-blue, opacity=0.3]
+      ([yshift=2mm]current page.south west) rectangle ([yshift=0mm]current page.south east);
+  \end{tikzpicture}%
+  \vspace*{4cm}
+  
+  \begin{center}
+    % Logo
+    \includegraphics[height=28mm]{logo.pdf}
+    
+    \vspace{12pt}
+    {\fontsize{36}{42}\selectfont\bfseries
+      \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
+    }
+    
+    \vspace{2cm}
+    {\fontsize{18}{24}\selectfont\textcolor{ilm-foreground}{Corporate Design Manual}}
+    
+    \vspace{8pt}
+    {\large\textcolor{ilm-muted}{Richtlinien für die visuelle Identität}}
+    
+    \vfill
+    {\small\textcolor{ilm-muted}{Version 1.0 · \today}}
+  \end{center}
+\end{titlepage}
+
+% ─── Table of Contents ───────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\section{Einleitung}
+\sectionbar
+
+Dieses Dokument definiert die visuellen Gestaltungsrichtlinien der Marke \textbf{IlmTech}.
+Es stellt sicher, dass alle Kommunikationsmittel — von der Website über Drucksachen bis zu
+Präsentationen — ein einheitliches, professionelles Erscheinungsbild aufweisen.
+
+\subsection{Über IlmTech}
+
+IlmTech bietet intelligente Lösungen in den Bereichen \textbf{Smart Home \& Energie}
+sowie \textbf{KI \& Automation}. Der Sitz ist in Ilmenau, Thüringen. Die Marke steht für:
+
+\begin{itemize}[leftmargin=2em]
+  \item Technologische Kompetenz und Innovation
+  \item Lokale Nähe und persönliche Betreuung
+  \item Datenschutz und Transparenz
+  \item Zukunftssichere, offene Lösungen
+\end{itemize}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\newpage
+\section{Logo \& Wortmarke}
+\sectionbar
+
+\subsection{Logo (Bildmarke)}
+
+Das IlmTech-Logo ist eine stilisierte Gebäude-Silhouette, die Smart Home und Technologie
+symbolisiert. Es wird als Strichzeichnung in der Primärfarbe \textcolor{ilm-blue!80!black}{\textbf{Accent Blue}} verwendet.
+
+\begin{center}
+  \fbox{\includegraphics[height=40mm]{logo.pdf}}
+  
+  \vspace{6pt}
+  {\small Bildmarke — Standardgröße, freistehend}
+\end{center}
+
+\subsection{Wortmarke}
+
+Die Wortmarke besteht aus zwei Teilen:
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[inner sep=12pt, fill=ilm-bg, rounded corners=6pt] {%
+      {\fontsize{28}{34}\selectfont\bfseries
+        \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
+      }%
+    };
+  \end{tikzpicture}
+  
+  \vspace{6pt}
+  {\small Wortmarke auf dunklem Hintergrund}
+\end{center}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{„Ilm"} — In der Primärfarbe Accent Blue (\texttt{\#00D4FF})
+  \item \textbf{„Tech"} — In Weiß (auf dunklem Grund) oder Dunkel (auf hellem Grund)
+  \item Schrift: \textbf{Inter Bold}, keine Abstände, kein Bindestrich
+\end{itemize}
+
+\subsection{Kombinierte Marke}
+
+Die bevorzugte Darstellung kombiniert Bildmarke und Wortmarke horizontal:
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[inner sep=12pt, fill=ilm-bg, rounded corners=6pt] {%
+      \includegraphics[height=14mm]{logo.pdf}\hspace{6pt}%
+      {\fontsize{20}{24}\selectfont\bfseries
+        \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
+      }%
+    };
+  \end{tikzpicture}
+  
+  \vspace{6pt}
+  {\small Kombinierte Marke — Standardanwendung}
+\end{center}
+
+\subsection{Schutzzone}
+
+Um das Logo herum ist eine Schutzzone von mindestens \textbf{50\%} der Logohöhe einzuhalten.
+Kein Text, Grafik oder Seitenkante darf in die Schutzzone ragen.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[inner sep=0pt] (logo) {\includegraphics[height=20mm]{logo.pdf}};
+    \draw[ilm-blue!50, dashed, line width=0.5pt]
+      ([shift={(-10mm,-10mm)}]logo.south west) rectangle ([shift={(10mm,10mm)}]logo.north east);
+    \draw[<->, ilm-blue!70, line width=0.4pt]
+      ([xshift=-8mm]logo.south west) -- ([xshift=-8mm, yshift=-10mm]logo.south west)
+      node[midway, left, font=\tiny] {50\%};
+  \end{tikzpicture}
+\end{center}
+
+\subsection{Mindestgröße}
+
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Medium} & \textbf{Mindesthöhe} \\
+  \midrule
+  Druck (Briefkopf, Visitenkarte) & 10\,mm \\
+  Digital (Website, App) & 24\,px \\
+  Favicon / Icon & 16$\times$16\,px \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Nicht erlaubt}
+
+\begin{itemize}[leftmargin=2em]
+  \item Logo drehen, verzerren oder spiegeln
+  \item Farbverlauf auf das Logo anwenden
+  \item Logo mit niedrigem Kontrast auf unruhigem Hintergrund platzieren
+  \item Wortmarke in einer anderen Schrift oder Groß-/Kleinschreibung setzen
+  \item Einzelteile der kombinierten Marke trennen und umpositionieren
+\end{itemize}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\newpage
+\section{Farbpalette}
+\sectionbar
+
+\subsection{Primärfarben}
+
+Die Primärfarben bilden den Kern der visuellen Identität.
+
+\vspace{10pt}
+
+\noindent
+\colorswatch{ilm-blue}{Accent Blue (Primär)}{\#00D4FF \quad RGB 0, 212, 255}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-bg}{Background}{\#0B1121 \quad RGB 11, 17, 33}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-dark}{Primary Dark}{\#0F1A30 \quad RGB 15, 26, 48}
+
+\subsection{Sekundärfarben}
+
+Sekundärfarben werden für Akzente, Kategorien und visuelle Unterscheidung eingesetzt.
+
+\vspace{10pt}
+
+\noindent
+\colorswatch{ilm-orange}{Accent Orange}{\#F59E0B \quad RGB 245, 158, 11}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-green}{Accent Green}{\#22C55E \quad RGB 34, 197, 94}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-purple}{Accent Purple}{\#A855F7 \quad RGB 168, 85, 247}
+
+\subsection{Neutrale Farben}
+
+\vspace{10pt}
+
+\noindent
+\colorswatch{ilm-foreground}{Foreground (Text)}{\#E8EAF0 \quad RGB 232, 234, 240}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-muted}{Text Muted}{\#94A3B8 \quad RGB 148, 163, 184}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-surface}{Surface}{\#1E293B \quad RGB 30, 41, 59}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-surface-light}{Surface Light}{\#263348 \quad RGB 38, 51, 72}
+
+\vspace{12pt}
+\noindent
+\colorswatch{ilm-primary}{Primary}{\#1A2744 \quad RGB 26, 39, 68}
+
+\subsection{Farbanwendung}
+
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Kontext} & \textbf{Farbe} \\
+  \midrule
+  Website-Hintergrund & Background (\texttt{\#0B1121}) \\
+  Überschriften, Logos & Accent Blue (\texttt{\#00D4FF}) + Weiß \\
+  Fließtext (dunkel) & Foreground (\texttt{\#E8EAF0}) \\
+  Sekundärtext & Text Muted (\texttt{\#94A3B8}) \\
+  Buttons, Links, CTAs & Accent Blue (\texttt{\#00D4FF}) \\
+  Warnungen, Alerts & Accent Orange (\texttt{\#F59E0B}) \\
+  Erfolg, Beispiele & Accent Green (\texttt{\#22C55E}) \\
+  KI-Segment-Akzent & Accent Purple (\texttt{\#A855F7}) \\
+  Karten, Blöcke & Surface (\texttt{\#1E293B}) \\
+  \midrule
+  Druck — Hintergrund & Weiß (\texttt{\#FFFFFF}) \\
+  Druck — Text & Primary Dark (\texttt{\#0F1A30}) \\
+  Druck — Akzente & Accent Blue (\texttt{\#00D4FF}) \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Barrierefreiheit}
+
+Alle Text-Hintergrund-Kombinationen müssen mindestens \textbf{WCAG AA} (Kontrastverhältnis ≥ 4.5:1 für normalen Text) erfüllen.
+
+\begin{tabularx}{\textwidth}{llc}
+  \toprule
+  \textbf{Text} & \textbf{Hintergrund} & \textbf{Kontrast} \\
+  \midrule
+  Foreground (\#E8EAF0) & Background (\#0B1121) & 14.5:1 ✓ \\
+  Accent Blue (\#00D4FF) & Background (\#0B1121) & 9.8:1 ✓ \\
+  Text Muted (\#94A3B8) & Background (\#0B1121) & 6.7:1 ✓ \\
+  \bottomrule
+\end{tabularx}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\newpage
+\section{Typografie}
+\sectionbar
+
+\subsection{Primärschrift: Inter}
+
+\textbf{Inter} ist eine Open-Source-Schrift, optimiert für Bildschirmdarstellung. Sie wird sowohl
+auf der Website als auch in allen Drucksachen und Präsentationen verwendet.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[fill=ilm-bg, rounded corners=6pt, inner sep=16pt, text width=13cm, align=left] {%
+      {\fontsize{28}{34}\selectfont\textcolor{white}{Inter Regular}}\\[8pt]
+      {\fontsize{28}{34}\selectfont\bfseries\textcolor{white}{Inter Bold}}\\[12pt]
+      {\fontsize{11}{16}\selectfont\textcolor{ilm-muted}{%
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ\\
+        abcdefghijklmnopqrstuvwxyz\\
+        0123456789 !@\#\$\%\&*()+-=
+      }}%
+    };
+  \end{tikzpicture}
+\end{center}
+
+\vspace{4pt}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Quelle:} Google Fonts — \url{https://fonts.google.com/specimen/Inter}
+  \item \textbf{Lizenz:} SIL Open Font License 1.1
+  \item \textbf{Web-Variable:} \texttt{--font-inter}, geladen via \texttt{next/font/google}
+  \item \textbf{LaTeX:} \texttt{inter} Paket (TeX Live) oder \texttt{fontspec} mit lokalem Font
+\end{itemize}
+
+\subsection{Schriftschnitte \& Anwendung}
+
+\begin{tabularx}{\textwidth}{llX}
+  \toprule
+  \textbf{Schnitt} & \textbf{Gewicht} & \textbf{Verwendung} \\
+  \midrule
+  Regular & 400 & Fließtext, Beschreibungen \\
+  Medium & 500 & Labels, Navigation, Formularfelder \\
+  Semi-Bold & 600 & Zwischenüberschriften, Kartenheader \\
+  Bold & 700 & Überschriften H1–H3, Wortmarke \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Schriftgrößen}
+
+\begin{tabularx}{\textwidth}{llll}
+  \toprule
+  \textbf{Element} & \textbf{Web (Tailwind)} & \textbf{Druck} & \textbf{Präsentation} \\
+  \midrule
+  H1 & \texttt{text-4xl / 5xl} (36–48px) & 24pt & \texttt{\textbackslash Large} (20pt) \\
+  H2 & \texttt{text-2xl / 3xl} (24–30px) & 18pt & \texttt{\textbackslash large} (17pt) \\
+  H3 & \texttt{text-xl} (20px) & 14pt & \texttt{\textbackslash normalsize} (11pt) \\
+  Fließtext & \texttt{text-base} (16px) & 11pt & 11pt \\
+  Klein & \texttt{text-sm} (14px) & 9pt & \texttt{\textbackslash small} (10pt) \\
+  Label / UI & \texttt{text-xs} (12px) & 8pt & \texttt{\textbackslash footnotesize} (8pt) \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Fallback-Schriften}
+
+Falls Inter nicht verfügbar ist:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \texttt{system-ui}
+  \item \texttt{-apple-system} (macOS)
+  \item \texttt{Segoe UI} (Windows)
+  \item \texttt{sans-serif}
+\end{enumerate}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\newpage
+\section{Anwendungsbeispiele}
+\sectionbar
+
+\subsection{Briefkopf}
+
+Der Briefkopf verwendet die kombinierte Marke (Logo + Wortmarke) rechts oben, eine dünne
+Akzentlinie in Accent Blue unter dem Header, und die Kontaktdaten im Footer.
+
+\begin{itemize}[leftmargin=2em]
+  \item Klasse: \texttt{ilmtech-letter.cls} (KOMA-Script scrlttr2)
+  \item Akzentlinie: 0.6pt, Accent Blue
+  \item Footer: Firma · Inhaber · Adresse | Seite X von Y
+\end{itemize}
+
+\subsection{Präsentation}
+
+Beamer-Folien verwenden den dunklen Hintergrund (\texttt{\#0B1121}) mit heller Schrift.
+
+\begin{itemize}[leftmargin=2em]
+  \item Theme: \texttt{beamerthemeilmtech.sty}
+  \item Format: 16:9 (\texttt{aspectratio=169})
+  \item Titelfolie: Logo + Wortmarke, Accent Blue Top-Bar
+  \item Abschnittstrennfolien: Nummerierung + Abschnittsname zentriert
+  \item Footer: Firmenname links, Seitenzahl rechts
+  \item Handout-Variante: 2 Folien pro A4-Seite
+\end{itemize}
+
+\subsection{Website}
+
+\begin{itemize}[leftmargin=2em]
+  \item Framework: Next.js mit Tailwind CSS
+  \item Farbvariablen: CSS Custom Properties in \texttt{:root}
+  \item Animationen: Framer Motion (subtile Einblendungen, keine ablenkenden Effekte)
+  \item Responsiv: Mobile-first, Breakpoints bei \texttt{sm} (640px), \texttt{md} (768px), \texttt{lg} (1024px)
+\end{itemize}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+\newpage
+\section{Kontaktdaten}
+\sectionbar
+
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Feld} & \textbf{Wert} \\
+  \midrule
+  Firma & IlmTech \\
+  Inhaber & Christoph Gerhardt \\
+  Adresse & Fichtenweg 1, 98693 Ilmenau, Deutschland \\
+  Telefon & +49 152 5439 9778 \\
+  E-Mail & \href{mailto:info@ilmtech.de}{info@ilmtech.de} \\
+  Website & \href{https://ilmtech.de}{ilmtech.de} \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{2cm}
+\begin{center}
+  {\small\textcolor{ilm-muted}{%
+    Stand: \today ~·~ IlmTech Corporate Design Manual v1.0%
+  }}
+\end{center}
+
+\end{document}

@@ -5,9 +5,9 @@
 LATEX = lualatex
 FLAGS = -interaction=nonstopmode -halt-on-error
 
-.PHONY: all letter beamer handout clean
+.PHONY: all letter beamer handout cd clean
 
-all: letter beamer handout
+all: letter beamer handout cd
 
 # ── Letter ───────────────────────────────────────────────────
 letter: letter/letter-example.pdf
@@ -30,7 +30,15 @@ beamer/handout-example.pdf: beamer/handout-example.tex beamer/beamerthemeilmtech
 	cd beamer && $(LATEX) $(FLAGS) handout-example.tex
 	cd beamer && $(LATEX) $(FLAGS) handout-example.tex
 
+# ── Corporate Design Manual ──────────────────────────────────
+cd: corporate-design.pdf
+
+corporate-design.pdf: corporate-design.tex logo.pdf
+	$(LATEX) $(FLAGS) corporate-design.tex
+	$(LATEX) $(FLAGS) corporate-design.tex
+
 # ── Clean ────────────────────────────────────────────────────
 clean:
 	rm -f letter/*.pdf letter/*.aux letter/*.log letter/*.out letter/*.nav letter/*.snm letter/*.toc
 	rm -f beamer/*.pdf beamer/*.aux beamer/*.log beamer/*.out beamer/*.nav beamer/*.snm beamer/*.toc
+	rm -f corporate-design.pdf corporate-design.aux corporate-design.log corporate-design.out corporate-design.toc
