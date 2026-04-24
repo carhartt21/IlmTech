@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import CTAButton from '@/components/CTAButton';
-import HeroHouse from '@/components/HeroHouse';
+import HeroCTAs from '@/components/HeroCTAs';
+import HeroLogo from '@/components/HeroLogo';
 import ServiceCard from '@/components/ServiceCard';
 import SectionHeading from '@/components/SectionHeading';
 import {
@@ -45,59 +46,32 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-visible">
         <div className="absolute inset-0 bg-gradient-to-b from-accent-blue/5 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              <span className="text-white">{t.hero.title1}</span>
-              <br />
-              <span className="text-accent-blue glow-blue">{t.hero.title2}</span>
-            </h1>
-            <p className="mt-6 text-lg text-text-muted max-w-xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 max-w-4xl mx-auto">
+            <div className="flex-shrink-0 w-24 h-24 md:w-36 md:h-36">
+              <HeroLogo />
+            </div>
+            <div className="text-center md:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                <span className="text-white">{t.hero.title1}</span>
+                <br />
+                <span className="text-accent-blue glow-blue">{t.hero.title2}</span>
+              </h1>
+            </div>
+          </div>
+
+          <div className="text-center max-w-3xl mx-auto mt-8">
+            <p className="text-lg text-text-muted">
               {t.hero.subtitle}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <CTAButton href={`/${locale}/kontakt`}>{t.hero.cta1}</CTAButton>
-              <CTAButton href={`/${locale}/smart-home`} variant="secondary">{dict.nav.smartHome}</CTAButton>
-              <CTAButton href={`/${locale}/ai-services`} variant="secondary">{dict.nav.aiServices}</CTAButton>
-              <CTAButton href={`/${locale}/projekte`} variant="secondary">{locale === 'de' ? 'Projekte' : 'Projects'}</CTAButton>
-            </div>
+            <p className="mt-4 text-sm font-semibold tracking-widest uppercase text-accent-blue">
+              {t.hero.tagline}
+            </p>
           </div>
 
-          <div className="mt-12">
-            <HeroHouse />
-          </div>
-        </div>
-      </section>
-
-      {/* Services — Two Worlds */}
-      <section className="py-10 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-accent-blue/30 bg-accent-blue/5 p-6 sm:p-8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-              <div className="max-w-3xl">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent-blue">
-                  {locale === 'de' ? 'Aktuelles Projekt' : 'Current project'}
-                </p>
-                <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-white">
-                  {locale === 'de'
-                    ? 'Digitale Betriebsplattform fuer Hausverwaltung'
-                    : 'Digital operating platform for property management'}
-                </h2>
-                <p className="mt-3 text-text-muted">
-                  {locale === 'de'
-                    ? 'Integrierte Projektbeschreibung mit Fokus auf automatische Kalkulation, Verwaltung und Erstellung der Nebenkostenabrechnung.'
-                    : 'Integrated project description with a focus on automated utility-cost calculation, management, and statement creation.'}
-                </p>
-              </div>
-              <div>
-                <CTAButton href={`/${locale}/projekte/hausverwaltung-betriebsplattform`}>
-                  {locale === 'de' ? 'Projekt ansehen' : 'View project'}
-                </CTAButton>
-              </div>
-            </div>
-          </div>
+          <HeroCTAs locale={locale} smartHomeLabel={t.hero.ctaSmartHome} aiServicesLabel={t.hero.ctaAI} />
         </div>
       </section>
 
