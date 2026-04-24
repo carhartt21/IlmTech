@@ -13,6 +13,7 @@ const en: Dictionary = {
     smartHomeServices: 'Services',
     smartHomeTech: 'Technologies',
     aiServices: 'AI Services',
+    projects: 'Projects',
     aiServicesHub: 'Overview',
     aiHomeAgent: 'Home AI Agent',
     aiWorkflow: 'Workflow Automation',

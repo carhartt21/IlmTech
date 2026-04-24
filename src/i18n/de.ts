@@ -11,6 +11,7 @@ const de = {
     smartHomeServices: 'Leistungen',
     smartHomeTech: 'Technologien',
     aiServices: 'KI-Services',
+    projects: 'Projekte',
     aiServicesHub: 'Übersicht',
     aiHomeAgent: 'Home AI Agent',
     aiWorkflow: 'Workflow-Automation',
