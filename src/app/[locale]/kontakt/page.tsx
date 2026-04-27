@@ -11,8 +11,24 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: dict.contactPage.meta.title, description: dict.contactPage.meta.description };
 }
 
-export default async function Kontakt({ params }: { params: Promise<{ locale: string }> }) {
+type ContactSearchParams = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  projectType?: string;
+  message?: string;
+  callbackTime?: string;
+};
+
+export default async function Kontakt({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<ContactSearchParams>;
+}) {
   const { locale } = await params;
+  const query = await searchParams;
   if (!locales.includes(locale as Locale)) notFound();
   const dict = await getDictionary(locale as Locale);
   const t = dict.contactPage;
@@ -35,7 +51,7 @@ export default async function Kontakt({ params }: { params: Promise<{ locale: st
             {/* Form column */}
             <div className="lg:col-span-3">
               <div className="p-6 sm:p-8 rounded-2xl bg-surface/30 border border-white/5">
-                <ContactForm />
+                <ContactForm initialValues={query} />
               </div>
             </div>
 

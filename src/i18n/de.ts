@@ -16,6 +16,7 @@ const de = {
     aiWorkflow: 'Workflow-Automation',
     aiInfrastruktur: 'KI-Infrastruktur',
     aiConsulting: 'KI-Beratung',
+    pitches: 'Pitch-Decks',
     about: 'Über uns',
     contact: 'Kontakt',
     cta: 'Kostenloses Erstgespräch',
@@ -45,7 +46,9 @@ const de = {
       cta1: 'Kostenloses Erstgespräch',
       cta2: 'Leistungen ansehen',
       ctaSmartHome: 'Smart Home & Energie',
+      ctaSmartHomeAudience: 'Für Privatkunden',
       ctaAI: 'KI & Automation',
+      ctaAIAudience: 'Für Unternehmen',
     },
     benefits: {
       title: 'Warum Smart Home mit IlmTech?',

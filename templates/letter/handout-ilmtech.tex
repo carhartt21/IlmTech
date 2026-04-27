@@ -1,0 +1,383 @@
+%% IlmTech — Advertising Handout (2 pages)
+%% Compile with: lualatex handout-ilmtech.tex
+\documentclass[
+  fontsize=10pt,
+  parskip=half,
+]{scrartcl}
+
+%% ── Packages ────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{inter}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{setspace}
+
+%% ── IlmTech Colors ─────────────────────────────────────────
+\definecolor{ilm-blue}{HTML}{00D4FF}
+\definecolor{ilm-dark}{HTML}{0F1A30}
+\definecolor{ilm-bg}{HTML}{0B1121}
+\definecolor{ilm-orange}{HTML}{F59E0B}
+\definecolor{ilm-green}{HTML}{22C55E}
+\definecolor{ilm-purple}{HTML}{A855F7}
+\definecolor{ilm-foreground}{HTML}{E8EAF0}
+\definecolor{ilm-muted}{HTML}{94A3B8}
+\definecolor{ilm-surface}{HTML}{1E293B}
+\definecolor{ilm-primary}{HTML}{1A2744}
+
+%% ── Page Geometry ───────────────────────────────────────────
+\geometry{
+  a4paper,
+  left=20mm,
+  right=20mm,
+  top=55mm,
+  bottom=20mm,
+}
+
+%% ── Hyperref ────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ilm-dark,
+  urlcolor=ilm-blue!70!black,
+  pdfauthor={IlmTech – Christoph Gerhardt},
+  pdftitle={IlmTech – Smart Home \& KI-Lösungen},
+}
+
+%% ── Logo path ───────────────────────────────────────────────
+\newcommand{\ilmtechlogopath}{../logo.pdf}
+
+%% ── No page numbers ────────────────────────────────────────
+\pagestyle{empty}
+
+%% ── Custom section styling ──────────────────────────────────
+\setkomafont{section}{\large\bfseries\color{ilm-dark}}
+\setkomafont{subsection}{\normalsize\bfseries\color{ilm-dark}}
+\RedeclareSectionCommand[beforeskip=1em,afterskip=0.4em]{section}
+\RedeclareSectionCommand[beforeskip=0.6em,afterskip=0.3em]{subsection}
+
+%% ── Service box command ─────────────────────────────────────
+\newcommand{\servicebox}[4]{%
+  \begin{tikzpicture}
+    \node[
+      draw=ilm-blue!30,
+      rounded corners=4pt,
+      fill=ilm-dark!5,
+      inner sep=8pt,
+      text width=\linewidth-20pt,
+      anchor=north west,
+    ] {%
+      {\color{#1}\Large #2}\;\;{\bfseries\color{ilm-dark} #3}\\[3pt]
+      {\small\color{ilm-dark!80} #4}%
+    };
+  \end{tikzpicture}%
+}
+
+%% ── Accent decoration (header + footer) ────────────────────
+\AddToHook{shipout/background}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    %% Header banner
+    \fill[ilm-dark]
+      (current page.north west) --
+      (current page.north east) --
+      ([yshift=-42mm]current page.north east) --
+      ([yshift=-49mm]current page.north west) -- cycle;
+    %% Accent line
+    \fill[ilm-blue]
+      ([yshift=-42mm]current page.north east) --
+      ([yshift=-49mm]current page.north west) --
+      ([yshift=-50.5mm]current page.north west) --
+      ([yshift=-43.5mm]current page.north east) -- cycle;
+    %% Logo + Text
+    \node[anchor=west, inner sep=0pt]
+      at ([xshift=20mm, yshift=-18mm]current page.north west)
+      {%
+        \includegraphics[height=14mm]{\ilmtechlogopath}%
+      };
+    \node[anchor=west, inner sep=0pt, font=\fontsize{20}{24}\selectfont\bfseries]
+      at ([xshift=40mm, yshift=-18mm]current page.north west)
+      {%
+        \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
+      };
+    %% Tagline
+    \node[anchor=west, inner sep=0pt, font=\normalsize]
+      at ([xshift=20mm, yshift=-32mm]current page.north west)
+      {%
+        \textcolor{ilm-foreground}{Ihr Partner für intelligente Systeme.}%
+      };
+    %% Contact info (right side)
+    \node[anchor=east, inner sep=0pt, font=\small, text=ilm-foreground, align=right]
+      at ([xshift=-20mm, yshift=-18mm]current page.north east)
+      {%
+        \textcolor{ilm-muted}{Tel.}\; +49\,152\,5439\,9778\\
+        \textcolor{ilm-muted}{E-Mail:}\; info@ilmtech.de\\
+        \textcolor{ilm-muted}{Web:}\; www.ilmtech.de%
+      };
+    %% Footer line
+    \draw[ilm-muted!30, line width=0.3pt]
+      ([yshift=14mm, xshift=20mm]current page.south west) --
+      ([yshift=14mm, xshift=-20mm]current page.south east);
+    %% Footer text
+    \node[anchor=south, inner sep=0pt, font=\scriptsize\color{ilm-muted}]
+      at ([yshift=10mm]current page.south)
+      {IlmTech · Christoph Gerhardt · Fichtenweg 1 · 98693 Ilmenau · www.ilmtech.de};
+  \end{tikzpicture}%
+}
+
+%% ── List styling ────────────────────────────────────────────
+\setlist[itemize]{leftmargin=1.5em, itemsep=1pt, parsep=0pt, topsep=2pt, label={\color{ilm-blue}\textbullet}}
+
+%% ── Section divider ──────────────────────────────────────────
+\newcommand{\sectiondivider}{%
+  \par\vspace{0.4em}%
+  {\color{ilm-blue!25}\hrule height 0.4pt}%
+  \vspace{0.2em}%
+}
+
+%% ── USP box ─────────────────────────────────────────────────
+\newcommand{\uspbox}[3]{%
+  \begin{tikzpicture}
+    \node[
+      draw=ilm-blue!25,
+      rounded corners=4pt,
+      fill=ilm-dark!5,
+      inner sep=7pt,
+      text width=48mm,
+      minimum height=22mm,
+      anchor=north west,
+    ] {%
+      {\color{#1}\Large #2}\\[3pt]
+      {\small\color{ilm-dark!85} #3}%
+    };
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+%% ═══════════════════════════════════════════════════════════
+%% PAGE 1 — Concept & Smart Home
+%% ═══════════════════════════════════════════════════════════
+
+\section*{Lokal. Offen. Herstellerunabhängig.}
+
+Die Welt smarter Geräte wächst rasant — doch proprietäre Apps, Cloud-Abhängigkeiten und
+inkompatible Standards machen es schwer, nachhaltige Lösungen zu finden.
+\textbf{IlmTech} löst genau dieses Problem: Wir planen, installieren und betreuen
+intelligente Systeme auf Basis von \textbf{Home Assistant}, lokalen KI-Modellen
+und offenen Technologien — für Ihr Zuhause und Ihr Unternehmen.
+
+\vspace{0.3em}
+\begin{center}
+  \uspbox{ilm-blue}{\faLock\;\; \textbf{\normalsize Privat \& Lokal}}{%
+    Sie entscheiden, welche Daten bei Ihnen bleiben — schnell, zuverlässig, sicher.}%
+  \hfill
+  \uspbox{ilm-orange}{\faCubes\;\; \textbf{\normalsize Herstellerunabhängig}}{%
+    Offene Standards, 2\,000+ Integrationen. Kein Lock-in — Ihr System gehört Ihnen.}%
+  \hfill
+  \uspbox{ilm-green}{\faHandshake\;\; \textbf{\normalsize Alles aus einer Hand}}{%
+    Von der Beratung über Installation bis zur Betreuung — persönlich, vor Ort, aus Ilmenau.}%
+\end{center}
+
+\sectiondivider
+
+\section*{\texorpdfstring{\textcolor{ilm-blue}{\faHome}\;\;Smart Home \& Energie}{Smart Home \& Energie}}
+
+Wir vernetzen Ihr Zuhause intelligent — von Photovoltaik und Wallbox bis zu
+Licht, Heizung und Sicherheit. Alles in \textbf{einem System}, gesteuert über
+ein übersichtliches Dashboard.
+
+\begin{multicols}{2}
+\subsection*{\textcolor{ilm-orange}{\faSolarPanel}\; Energie}
+\begin{itemize}
+  \item PV-Integration \& Eigenverbrauchsoptimierung
+  \item Wallbox — intelligentes Laden nach PV-Ertrag
+  \item Speicher- \& Einspeisesteuerung
+  \item Echtzeit-Energiedashboard
+\end{itemize}
+
+\subsection*{\textcolor{ilm-green}{\faLightbulb}\; Komfort \& Klima}
+\begin{itemize}
+  \item Beleuchtung, Rollläden, Szenen
+  \item Adaptive Heizungssteuerung
+  \item Klimageräte-Integration
+  \item Anwesenheitserkennung
+\end{itemize}
+
+\columnbreak
+
+\subsection*{\textcolor{ilm-purple}{\faIcon{shield-alt}}\; Sicherheit}
+\begin{itemize}
+  \item Tür-/Fenstersensoren, Bewegungsmelder
+  \item IP-Kameras mit Bewegungserkennung
+  \item Echtzeit-Benachrichtigungen
+  \item Abwesenheitsmodus \& Alarmanlagen
+\end{itemize}
+
+\subsection*{\textcolor{ilm-blue}{\faTools}\; Individuell}
+\begin{itemize}
+  \item Individuelle Dashboards \& Wandpanels
+  \item ESPHome-Sensorik \& Eigenentwicklung
+  \item Garten, Zisterne, Luftqualität
+  \item Integration bestehender Geräte
+\end{itemize}
+\end{multicols}
+
+\sectiondivider
+
+\section*{So arbeiten wir}
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={
+    draw=ilm-blue!40,
+    rounded corners=4pt,
+    fill=ilm-dark!6,
+    inner sep=6pt,
+    text width=26mm,
+    minimum height=16mm,
+    align=center,
+    font=\small,
+  },
+  arr/.style={->, thick, color=ilm-blue!60},
+]
+  \node[box] (s1) at (0,0) {\textcolor{ilm-blue}{\faIcon{pencil-alt}}\\[2pt]\bfseries Beratung};
+  \node[box] (s2) at (3.4,0) {\textcolor{ilm-orange}{\faClipboardList}\\[2pt]\bfseries Planung};
+  \node[box] (s3) at (6.8,0) {\textcolor{ilm-green}{\faWrench}\\[2pt]\bfseries Installation};
+  \node[box] (s4) at (10.2,0) {\textcolor{ilm-purple}{\faGraduationCap}\\[2pt]\bfseries Einweisung};
+  \node[box] (s5) at (13.6,0) {\textcolor{ilm-blue}{\faHeadset}\\[2pt]\bfseries Betreuung};
+  \draw[arr] (s1) -- (s2);
+  \draw[arr] (s2) -- (s3);
+  \draw[arr] (s3) -- (s4);
+  \draw[arr] (s4) -- (s5);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tikzpicture}
+  \node[
+    draw=ilm-blue,
+    rounded corners=6pt,
+    fill=ilm-dark,
+    inner sep=10pt,
+    text width=\linewidth-24pt,
+  ] {%
+    \centering
+    \textcolor{white}{\bfseries Basiert auf Home Assistant}\quad
+    \textcolor{ilm-foreground}{\small%
+    Quelloffen · 2\,000+ Integrationen · Lokal statt Cloud · Regelmäßige Updates · Millionen Installationen weltweit}
+  };
+\end{tikzpicture}
+\end{center}
+
+%% ═══════════════════════════════════════════════════════════
+%% PAGE 2 — KI-Services & CTA
+%% ═══════════════════════════════════════════════════════════
+\newpage
+
+\section*{\texorpdfstring{\textcolor{ilm-blue}{\faRobot}\;\;KI \& Automation}{KI \& Automation}}
+
+Künstliche Intelligenz ist keine Zukunftsmusik — sie kann \textbf{heute} Ihr
+Zuhause und Ihr Unternehmen spürbar verbessern. IlmTech bringt KI dorthin,
+wo sie wirklich nützt: lokal, datenschutzkonform und praxisnah.
+
+\begin{multicols}{2}
+
+\subsection*{\textcolor{ilm-blue}{\faBrain}\; Home AI Agent}
+Ein KI-gestützter Assistent für Ihr Smart Home: natürliche
+Sprache, proaktive Vorschläge — vollständig lokal.
+\begin{itemize}
+  \item \glqq Heizung an, ich bin in 20 Min. da\grqq
+  \item PV-Überschuss erkennen \& Wallbox starten
+  \item Morgenbriefing, Energiereport
+  \item Läuft auf Ihrem Server — keine Cloud
+\end{itemize}
+
+\subsection*{\textcolor{ilm-orange}{\faCogs}\; Workflow-Automatisierung}
+Geschäftsprozesse für KMU automatisieren — mit n8n,
+KI-Agenten und offenen Technologien.
+\begin{itemize}
+  \item Angebote, Rechnungen, Rückmeldungen
+  \item E-Mail-Triage \& Terminmanagement
+  \item Dokumentenanalyse \& Extraktion
+  \item DSGVO-konform, selbst gehostet
+\end{itemize}
+
+\columnbreak
+
+\subsection*{\textcolor{ilm-purple}{\faServer}\; KI-Infrastruktur}
+Private KI-Server für Unternehmen — ohne Cloud-Abhängigkeit.
+\begin{itemize}
+  \item Lokale LLMs via Ollama
+  \item RAG-Systeme für Wissensdatenbanken
+  \item Dokumentenanalyse \& Chatbots
+  \item Volle Kontrolle über Ihre Daten
+\end{itemize}
+
+\subsection*{\textcolor{ilm-green}{\faChartLine}\; KI-Beratung}
+Von der ersten Idee bis zum produktiven Einsatz —
+strategische Beratung für den Mittelstand.
+\begin{itemize}
+  \item AI Readiness Assessment
+  \item KI-Strategie \& Roadmap
+  \item Proof of Concept \& Pilotprojekt
+  \item Mitarbeiter-Schulungen
+\end{itemize}
+
+\end{multicols}
+
+\sectiondivider
+
+\section*{KI-Lösungen für jede Branche}
+
+\vspace{0.2em}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\bfseries}l X l}
+  Handwerk & Angebote, Rechnungen und Kundenkommunikation automatisieren &
+    \textcolor{ilm-blue}{\faCogs}\\[4pt]
+  Medizinische Praxen & Terminbestätigung, Vorab-Fragebögen und Recall-Management &
+    \textcolor{ilm-green}{\faCalendarCheck}\\[4pt]
+  Einzelhandel & Bestellwesen, Dienstplanung und Social-Media-Posts per KI &
+    \textcolor{ilm-orange}{\faStore}\\[4pt]
+  Hausverwaltung & Ticket-Triage, automatische Mieterkorrespondenz &
+    \textcolor{ilm-purple}{\faBuilding}\\[4pt]
+  Kanzleien & Dokumenten-Extraktion und Fristenmanagement &
+    \textcolor{ilm-blue}{\faBalanceScale}\\
+\end{tabularx}
+\end{center}
+
+\vspace{0.8em}
+
+\begin{center}
+\begin{tikzpicture}
+  \node[
+    draw=ilm-blue,
+    rounded corners=8pt,
+    fill=ilm-dark,
+    inner sep=14pt,
+    text width=\linewidth-32pt,
+  ] {%
+    \centering
+    \textcolor{white}{\Large\bfseries Bereit für intelligente Systeme?}\\[6pt]
+    \textcolor{ilm-foreground}{%
+      Vereinbaren Sie jetzt Ihr \textbf{kostenloses Erstgespräch} —
+      wir zeigen Ihnen, was in Ihrem Zuhause oder Unternehmen möglich ist.}\\[10pt]
+    \textcolor{ilm-blue}{\faPhone*}\;\textcolor{ilm-foreground}{+49\,152\,5439\,9778}%
+    \qquad
+    \textcolor{ilm-blue}{\faEnvelope}\;\textcolor{ilm-foreground}{info@ilmtech.de}%
+    \qquad
+    \textcolor{ilm-blue}{\faGlobe}\;\textcolor{ilm-foreground}{www.ilmtech.de}%
+  };
+\end{tikzpicture}
+\end{center}
+
+\end{document}

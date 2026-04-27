@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import CTAButton from '@/components/CTAButton';
 import HeroCTAs from '@/components/HeroCTAs';
 import HeroLogo from '@/components/HeroLogo';
+import PitchDeckSection from '@/components/PitchDeckSection';
 import ServiceCard from '@/components/ServiceCard';
 import SectionHeading from '@/components/SectionHeading';
 import {
@@ -71,7 +72,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </p>
           </div>
 
-          <HeroCTAs locale={locale} smartHomeLabel={t.hero.ctaSmartHome} aiServicesLabel={t.hero.ctaAI} />
+          <HeroCTAs locale={locale} smartHomeLabel={t.hero.ctaSmartHome} smartHomeAudience={t.hero.ctaSmartHomeAudience} aiServicesLabel={t.hero.ctaAI} aiAudience={t.hero.ctaAIAudience} />
         </div>
       </section>
 
@@ -95,6 +96,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
       </section>
+
+      <PitchDeckSection locale={locale} />
 
       {/* Process & Trust */}
       <section className="py-20 sm:py-28">

@@ -13,11 +13,31 @@ const routes = [
   '/ai-services/home-ai',
   '/ai-services/infrastruktur',
   '/ai-services/workflow',
+  '/pitches',
   '/ueber-uns',
   '/kontakt',
   '/impressum',
   '/datenschutz',
 ];
+
+const pitchRoutesByLocale: Record<'de' | 'en', string[]> = {
+  de: [
+    '/pitches/hausverwaltung',
+    '/pitches/insolvenz-auktionswesen',
+    '/pitches/medizinische-praxen',
+    '/pitches/anwaltskanzleien',
+    '/pitches/handwerksbetriebe',
+    '/pitches/hotels',
+  ],
+  en: [
+    '/pitches/property-management',
+    '/pitches/insolvency-auctions',
+    '/pitches/medical-practices',
+    '/pitches/law-firms',
+    '/pitches/craft-businesses',
+    '/pitches/hotels',
+  ],
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -35,6 +55,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
             en: `${BASE_URL}/en${route}`,
           },
         },
+      });
+    }
+  }
+
+  for (const locale of ['de', 'en'] as const) {
+    for (const route of pitchRoutesByLocale[locale]) {
+      entries.push({
+        url: `${BASE_URL}/${locale}${route}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
       });
     }
   }

@@ -69,10 +69,10 @@
 
 %% ── Sender Defaults ────────────────────────────────────────
 \setkomavar{fromname}{IlmTech}
-\setkomavar{fromaddress}{Fichtenweg 1\\98693 Ilmenau\\Deutschland}
-\setkomavar{fromphone}{+49 152 5439 9778}
-\setkomavar{fromemail}{info@ilmtech.de}
-\setkomavar{fromurl}{www.ilmtech.de}
+\setkomavar{fromaddress}{Fichtenweg 1\\98693 Ilmenau}
+\setkomavar{fromphone}{\textcolor{ilm-foreground}{+49 152 5439 9778}}
+\setkomavar{fromemail}{\textcolor{ilm-foreground}{info@ilmtech.de}}
+\setkomavar{fromurl}{\textcolor{ilm-foreground}{www.ilmtech.de}}
 \setkomavar{backaddressseparator}{ · }
 \setkomavar{backaddress}{IlmTech · Fichtenweg 1 · 98693 Ilmenau}
 \setkomavar{place}{Ilmenau}
@@ -89,14 +89,30 @@
     };
     \node[anchor=west, inner sep=0pt, font=\fontsize{16}{19}\selectfont\bfseries]
       at ([xshift=5pt]logo.east) {%
-        \textcolor{ilm-blue}{Ilm}\textcolor{ilm-dark}{Tech}%
+        \textcolor{ilm-blue}{Ilm}\textcolor{white}{Tech}%
       };
   \end{tikzpicture}%
 }
 
 %% ── First-page head: accent line ────────────────────────────
-\@setplength{firstheadvpos}{16mm}
-\@setplength{firstheadwidth}{\textwidth}
+\setplength{firstheadvpos}{10mm}
+\setplength{firstheadwidth}{\textwidth}
+
+%% ── Address field position (below header banner) ────────────
+\setplength{toaddrvpos}{58mm}
+
+%% ── Sender text colors (white on dark banner) ──────────────
+\setkomafont{fromname}{\bfseries\color{white}}
+\setkomafont{fromaddress}{\small\color{ilm-foreground}}
+%% Clear default KOMA labels (Telefon, E-Mail, URL) — use separators instead
+\setkomavar*{fromphone}{}
+\setkomavar*{fromemail}{}
+\setkomavar*{fromurl}{}
+\setkomavar{phoneseparator}{\textcolor{ilm-muted}{Tel.\,}}
+\setkomavar{emailseparator}{\textcolor{ilm-muted}{E-Mail:\,}}
+\setkomavar{urlseparator}{\textcolor{ilm-muted}{Web:\,}}
+%% Back address line styling
+\setkomafont{backaddress}{\sffamily\scriptsize\color{ilm-muted}}
 
 %% ── Footer ──────────────────────────────────────────────────
 \pagestyle{scrheadings}
@@ -115,12 +131,20 @@
 }
 
 %% ── Accent decoration ───────────────────────────────────────
-\AddToHook{shipout/foreground}{%
+\AddToHook{shipout/background}{%
   \begin{tikzpicture}[remember picture, overlay]
-    % Accent blue line below header
-    \draw[ilm-blue, line width=0.6pt]
-      ([yshift=-27mm, xshift=25mm]current page.north west) --
-      ([yshift=-27mm, xshift=-25mm]current page.north east);
+    % Angled header banner: dark strip with accent blue edge
+    \fill[ilm-dark]
+      (current page.north west) --
+      (current page.north east) --
+      ([yshift=-45mm]current page.north east) --
+      ([yshift=-52mm]current page.north west) -- cycle;
+    % Accent blue angled edge at bottom of banner
+    \fill[ilm-blue]
+      ([yshift=-45mm]current page.north east) --
+      ([yshift=-52mm]current page.north west) --
+      ([yshift=-53.5mm]current page.north west) --
+      ([yshift=-46.5mm]current page.north east) -- cycle;
     % Subtle footer separator
     \draw[ilm-muted!30, line width=0.3pt]
       ([yshift=18mm, xshift=25mm]current page.south west) --

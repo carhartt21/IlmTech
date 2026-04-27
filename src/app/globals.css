@@ -6,6 +6,7 @@
   --primary: #1a2744;
   --primary-dark: #0f1a30;
   --accent-blue: #00d4ff;
+  --accent-purple: #a855f7;
   --accent-orange: #f59e0b;
   --accent-green: #22c55e;
   --text-muted: #94a3b8;
@@ -19,6 +20,7 @@
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
   --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
   --color-accent-orange: var(--accent-orange);
   --color-accent-green: var(--accent-green);
   --color-text-muted: var(--text-muted);

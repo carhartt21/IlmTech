@@ -99,6 +99,14 @@ export default function Header() {
               {t.aiServices}
             </Link>
             <Link
+              href={`/${locale}/pitches`}
+              className={`text-sm transition-colors duration-200 ${
+                pathname.startsWith(`/${locale}/pitches`) ? 'text-accent-blue' : 'text-text-muted hover:text-accent-blue'
+              }`}
+            >
+              {t.pitches}
+            </Link>
+            <Link
               href={`/${locale}/ueber-uns`}
               className="text-sm text-text-muted hover:text-accent-blue transition-colors duration-200"
             >
@@ -147,6 +155,13 @@ export default function Header() {
             </Link>
             <Link href={`/${locale}/ai-services`} className="block px-3 py-2 text-text-muted hover:text-accent-blue transition-colors" onClick={() => setMobileOpen(false)}>
               {t.aiServices}
+            </Link>
+            <Link
+              href={`/${locale}/pitches`}
+              className="block px-3 py-2 text-text-muted hover:text-accent-blue transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              {t.pitches}
             </Link>
             {isAiPage && aiLinks.map((link) => (
               <Link key={link.href} href={link.href} className="block pl-6 pr-3 py-2 text-text-muted hover:text-accent-blue transition-colors" onClick={() => setMobileOpen(false)}>

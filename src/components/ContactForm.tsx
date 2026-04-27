@@ -4,7 +4,16 @@ import { useState, type FormEvent } from 'react';
 import { CheckCircleIcon } from './Icons';
 import { useI18n } from './I18nProvider';
 
-export default function ContactForm() {
+interface ContactFormInitialValues {
+  name?: string;
+  email?: string;
+  phone?: string;
+  projectType?: string;
+  message?: string;
+  callbackTime?: string;
+}
+
+export default function ContactForm({ initialValues }: { initialValues?: ContactFormInitialValues }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -79,6 +88,7 @@ export default function ContactForm() {
           name="name"
           type="text"
           required
+          defaultValue={initialValues?.name ?? ''}
           className={inputBase}
           placeholder={t.namePlaceholder}
         />
@@ -92,6 +102,7 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
+          defaultValue={initialValues?.email ?? ''}
           className={inputBase}
           placeholder={t.emailPlaceholder}
         />
@@ -104,6 +115,7 @@ export default function ContactForm() {
           id="phone"
           name="phone"
           type="tel"
+          defaultValue={initialValues?.phone ?? ''}
           className={inputBase}
           placeholder={t.phonePlaceholder}
         />
@@ -112,7 +124,7 @@ export default function ContactForm() {
       {/* Project Type */}
       <div>
         <label htmlFor="projectType" className="block text-sm font-medium text-text-muted mb-1.5">{t.projectTypeLabel}</label>
-        <select id="projectType" name="projectType" required className={inputBase}>
+        <select id="projectType" name="projectType" required className={inputBase} defaultValue={initialValues?.projectType ?? ''}>
           <option value="">{t.projectTypePlaceholder}</option>
           {t.projectTypes.map((pt) => (
             <option key={pt} value={pt}>{pt}</option>
@@ -128,6 +140,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
+          defaultValue={initialValues?.message ?? ''}
           className={inputBase}
           placeholder={t.messagePlaceholder}
         />
@@ -136,7 +149,7 @@ export default function ContactForm() {
       {/* Callback Time */}
       <div>
         <label htmlFor="callbackTime" className="block text-sm font-medium text-text-muted mb-1.5">{t.callbackTimeLabel}</label>
-        <select id="callbackTime" name="callbackTime" className={inputBase}>
+        <select id="callbackTime" name="callbackTime" className={inputBase} defaultValue={initialValues?.callbackTime ?? ''}>
           <option value="">{t.callbackTimePlaceholder}</option>
           {t.callbackTimes.map((ct) => (
             <option key={ct} value={ct}>{ct}</option>

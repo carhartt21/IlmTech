@@ -18,6 +18,7 @@ const en: Dictionary = {
     aiWorkflow: 'Workflow Automation',
     aiInfrastruktur: 'AI Infrastructure',
     aiConsulting: 'AI Consulting',
+    pitches: 'Pitch Decks',
     about: 'About Us',
     contact: 'Contact',
     cta: 'Free Consultation',
@@ -47,7 +48,9 @@ const en: Dictionary = {
       cta1: 'Free Consultation',
       cta2: 'View Services',
       ctaSmartHome: 'Smart Home & Energy',
+      ctaSmartHomeAudience: 'For Private Customers',
       ctaAI: 'AI & Automation',
+      ctaAIAudience: 'For Businesses',
     },
     benefits: {
       title: 'Why Smart Home with IlmTech?',
