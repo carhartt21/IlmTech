@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IlmTech | Digitale Betriebsplattform für Hausverwaltung</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1121;
+      --bg-elevated: #10192d;
+      --bg-panel: #152039;
+      --bg-panel-soft: #1a2744;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(0, 212, 255, 0.24);
+      --text: #e8eaf0;
+      --text-muted: #94a3b8;
+      --text-soft: #c8d3e6;
+      --accent: #00d4ff;
+      --accent-strong: #5ce1ff;
+      --accent-warm: #f59e0b;
+      --accent-green: #22c55e;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      --radius-sm: 0.75rem;
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --sidebar: 310px;
+      --content: 1360px;
+      --font-body: 'Satoshi', system-ui, sans-serif;
+      --font-display: 'Satoshi', system-ui, sans-serif;
+      --transition: 180ms cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: none; text-size-adjust: none; }
+    body {
+      min-height: 100dvh;
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top right, rgba(0, 212, 255, 0.1), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(26, 39, 68, 0.9), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -100px;
+      background: var(--accent);
+      color: #03111a;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      z-index: 100;
+      font-weight: 800;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      min-height: 100dvh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      height: 100dvh;
+      padding: var(--space-8) var(--space-6);
+      background: linear-gradient(180deg, rgba(11, 17, 33, 0.96), rgba(16, 25, 45, 0.96));
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand-lockup {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      background: linear-gradient(145deg, rgba(0, 212, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(0, 212, 255, 0.14);
+      box-shadow: 0 0 24px rgba(0, 212, 255, 0.18);
+      color: var(--accent);
+    }
+
+    .wordmark {
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .wordmark .ilm {
+      color: var(--accent);
+      text-shadow: 0 0 14px rgba(0, 212, 255, 0.45);
+    }
+
+    .brand-meta {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 28ch;
+    }
+
+    .nav {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--text);
+      background: rgba(0, 212, 255, 0.08);
+      border-color: rgba(0, 212, 255, 0.18);
+      transform: translateX(2px);
+    }
+
+    .side-card {
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(26, 39, 68, 0.72), rgba(16, 25, 45, 0.82));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .side-card h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .side-card p,
+    .side-card li {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .micro-list,
+    .fit-list,
+    .deliverable ul,
+    .pillar ul,
+    .mini-card ul,
+    .phase ul,
+    .highlight-panel ul {
+      list-style: none;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .tag-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: var(--space-3);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(0, 212, 255, 0.09);
+      border: 1px solid rgba(0, 212, 255, 0.14);
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .content { min-width: 0; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 17, 33, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar h2 {
+      font-size: clamp(1.15rem, 1rem + 0.6vw, 1.55rem);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .topbar p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .topbar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(0, 212, 255, 0.08);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6) var(--space-16);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(21, 32, 57, 0.92), rgba(16, 25, 45, 0.96));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: var(--space-10);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -20% auto;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.18), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: var(--space-4);
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.16);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 1.7rem + 2vw, 4.25rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+      margin-bottom: var(--space-5);
+    }
+
+    .hero p {
+      max-width: 62ch;
+      color: var(--text-soft);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: var(--space-6);
+    }
+
+    .cta,
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .cta {
+      background: var(--accent);
+      color: #03111a;
+      box-shadow: 0 0 22px rgba(0, 212, 255, 0.22);
+    }
+
+    .cta-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    .cta:hover,
+    .cta-secondary:hover,
+    .chip:hover,
+    .chip.active {
+      transform: translateY(-1px);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      padding: var(--space-6);
+    }
+
+    .metric {
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .metric.metric-accent {
+      background: rgba(0, 212, 255, 0.11);
+      border-color: rgba(0, 212, 255, 0.34);
+      box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.15) inset;
+    }
+
+    .metric.metric-accent .kpi {
+      color: var(--accent);
+      text-shadow: 0 0 16px rgba(0, 212, 255, 0.28);
+    }
+
+    .metric span {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .kpi {
+      font-size: clamp(1.7rem, 1.2rem + 1vw, 2.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+
+    .metric p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    .highlight-panel,
+    .fit-card,
+    .deliverable,
+    .architecture,
+    .timeline,
+    .mini-card,
+    .phase,
+    .outcome-card,
+    .matrix {
+      padding: var(--space-6);
+    }
+
+    .highlight-panel h3 {
+      font-size: 1rem;
+      margin-bottom: var(--space-3);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .highlight-panel li,
+    .micro-list li,
+    .fit-list li,
+    .deliverable li,
+    .pillar li,
+    .mini-card li,
+    .phase li {
+      position: relative;
+      padding-left: 1rem;
+      color: var(--text-soft);
+    }
+
+    .highlight-panel li::before,
+    .micro-list li::before,
+    .fit-list li::before,
+    .deliverable li::before,
+    .pillar li::before,
+    .mini-card li::before,
+    .phase li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.28);
+    }
+
+    .section {
+      margin-bottom: var(--space-8);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+
+    .section-head h3 {
+      font-size: clamp(1.6rem, 1.3rem + 1vw, 2.4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.55rem;
+    }
+
+    .section-head p {
+      max-width: 62ch;
+      color: var(--text-muted);
+    }
+
+    .client-fit {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--space-4);
+    }
+
+    .fit-card p,
+    .deliverable p,
+    .phase p,
+    .mini-card p,
+    td small,
+    .outcome-card p,
+    .layer p {
+      color: var(--text-muted);
+    }
+
+    .architecture {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .layer {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .layer-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.16);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .layer h4,
+    .pillar h5,
+    .mini-card h5,
+    .deliverable h4,
+    .phase h4,
+    .outcome-card h4,
+    .fit-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillars,
+    .outcome-grid,
+    .roadmap,
+    .engagement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+
+    .pillar,
+    .outcome-card {
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(21, 32, 57, 0.92), rgba(16, 25, 45, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .workflow-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: var(--space-4);
+    }
+
+    .chip {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-soft);
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .chip.active,
+    .chip:hover {
+      background: rgba(0, 212, 255, 0.12);
+      border-color: rgba(0, 212, 255, 0.25);
+      color: var(--accent);
+    }
+
+    .workflow-panels {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: var(--space-4);
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-4);
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .step-index {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #03111a;
+      font-size: 0.82rem;
+      font-weight: 900;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.28);
+    }
+
+    .step p { color: var(--text-muted); }
+
+    .workflow-side {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .mini-card {
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .matrix {
+      overflow: auto;
+      border-radius: var(--radius-lg);
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    td strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    .roadmap {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .phase {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(21, 32, 57, 0.92), rgba(16, 25, 45, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .phase-num {
+      display: inline-flex;
+      width: 2.1rem;
+      height: 2.1rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 0.9rem;
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .engagement-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .footer-note {
+      margin-top: var(--space-4);
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(0, 212, 255, 0.16);
+      background: rgba(0, 212, 255, 0.06);
+      color: var(--text-soft);
+    }
+
+    .footer-note strong { color: var(--accent); }
+
+    @media (max-width: 1180px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .hero,
+      .client-fit,
+      .workflow-panels,
+      .pillars,
+      .outcome-grid,
+      .roadmap,
+      .engagement-grid {
+        grid-template-columns: 1fr;
+      }
+      .layer { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar,
+      .wrap,
+      .sidebar {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+      }
+      .hero-card,
+      .metric-grid,
+      .highlight-panel,
+      .fit-card,
+      .deliverable,
+      .architecture,
+      .timeline,
+      .mini-card,
+      .phase,
+      .outcome-card,
+      .matrix {
+        padding: var(--space-5);
+      }
+      .metric-grid { grid-template-columns: 1fr; }
+      .topbar {
+        align-items: start;
+        flex-direction: column;
+      }
+      .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: block; }
+      .section-head p { margin-top: 0.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Seitennavigation">
+      <div class="brand-lockup">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" stroke-miterlimit="5" d="M -0.0002375 -0.0011625 L -0.0002375 -34.915225 C -0.0002375 -37.704288 2.284919 -39.954288 5.073981 -39.915225 L 42.234138 -39.356631 C 44.964606 -39.317569 47.159919 -37.091006 47.159919 -34.360538 L 47.159919 3.932431" transform="matrix(1, 0, 0, -1, 30.7268, 92.7254)"/>
+              <path fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="miter" stroke="currentColor" stroke-miterlimit="5" d="M 0.000525 0.00184375 L -9.741662 0.0135625 C -11.948694 0.0174688 -13.737756 1.806531 -13.737756 4.013563 L -13.737756 31.341688 C -13.737756 34.06825 -15.917444 36.290906 -18.6401 36.341688 L -33.089319 36.619031 C -37.694787 36.704969 -39.741662 42.44325 -36.23385 45.423719 L 16.887244 90.626844 C 18.723181 92.189344 21.414588 92.220594 23.285681 90.69325 L 42.32865 75.181531 C 43.39115 74.314344 44.988806 75.072156 44.988806 76.447156 L 44.988806 84.482313 C 44.988806 85.560438 45.844275 86.447156 46.9224 86.482313 L 58.496619 86.861219 C 59.625525 86.896375 60.563025 85.990125 60.563025 84.861219 L 60.563025 64.345594 C 60.563025 63.771375 60.809119 63.220594 61.242713 62.841688 L 80.742713 45.740125 C 84.191931 42.712781 82.090369 37.029188 77.504431 36.978406 L 71.875525 36.915906 C 69.652869 36.892469 67.875525 35.056531 67.9224 32.833875 L 68.742713 -6.392687 C 68.801306 -9.201281 66.559119 -11.517687 63.750525 -11.545031 L 30.051306 -11.908312" transform="matrix(1, 0, 0, -1, 57.8276, 120.037)"/>
+              <path fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" stroke-miterlimit="5" d="M -0.00118125 0.0001875 L 33.616006 28.230656 C 35.436319 29.761906 38.084756 29.793156 39.944131 28.312687 L 68.217569 5.808781 C 69.408975 4.859562 70.104287 3.418156 70.104287 1.894719 L 70.104287 -41.027156 C 70.104287 -43.238094 68.311319 -45.027156 66.104287 -45.027156 L 55.420694 -45.027156" transform="matrix(1, 0, 0, -1, 41.1379, 75.008)"/>
+              <path fill-rule="nonzero" fill="currentColor" d="M 81.886719 84.371094 C 81.886719 86.582031 80.09375 88.371094 77.886719 88.371094 C 75.675781 88.371094 73.886719 86.582031 73.886719 84.371094 C 73.886719 82.164062 75.675781 80.371094 77.886719 80.371094 C 80.09375 80.371094 81.886719 82.164062 81.886719 84.371094"/>
+            </svg>
+          </div>
+          <div>
+            <div class="wordmark"><span class="ilm">Ilm</span><span>Tech</span></div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#overview" class="active">Überblick <span>01</span></a>
+        <a href="#client-fit">Potenzial <span>02</span></a>
+        <a href="#architecture">Modell <span>03</span></a>
+        <a href="#workflows">Pilotpfad <span>04</span></a>
+        <a href="#positioning">Angebot <span>05</span></a>
+      </nav>
+
+
+    </aside>
+
+    <div class="content">
+      <main id="main" class="wrap">
+        <section id="overview" class="hero">
+          <article class="hero-card card">
+            <div class="eyebrow">Digitaler Objektbetrieb</div>
+            <h1>Digitale Hausverwaltung, die alle Abläufe im Griff hat.</h1>
+            <p>IlmTech verbindet Vermietung, Störung, Abrechnung und Technik in einem durchgängigen Betriebsmodell. Das schafft schnellere Abläufe, volle Transparenz und eine automatisierte, nachvollziehbare Nebenkostenabrechnung.</p>
+            <div class="hero-actions">
+              <a class="cta" href="#positioning">Angebot ansehen</a>
+              <a class="cta-secondary" href="#workflows">Pilotpfad ansehen</a>
+            </div>
+          </article>
+
+          <aside class="hero-side">
+            <div class="card metric-grid" aria-label="Kernkennzahlen">
+              <div class="metric">
+                <span>Positionierung</span>
+                <div class="kpi">6</div>
+                <p>Sechs integrierte Ebenen statt weiterer Insellösungen.</p>
+              </div>
+              <div class="metric">
+                <span>Kernprozesse</span>
+                <div class="kpi">4</div>
+                <p>Vier priorisierte Prozesse mit direktem operativem Nutzen.</p>
+              </div>
+              <div class="metric">
+                <span>Einstieg</span>
+                <div class="kpi">3</div>
+                <p>Drei Schritte von Beratung über Pilot bis Betrieb.</p>
+              </div>
+              <div class="metric metric-accent">
+                <span>Nebenkosten</span>
+                <div class="kpi">Auto</div>
+                <p>Kalkulation, Verwaltung und Erstellung laufen digital und nachvollziehbar.</p>
+              </div>
+            </div>
+
+          </aside>
+        </section>
+
+        <section id="client-fit" class="section">
+          <div class="section-head">
+            <div>
+              <h3>Potenzial</h3>
+              <p>Im Fokus stehen weniger Reibung im Betrieb, bessere Eigentümerkommunikation, ein klarer Weg in Wartung und Energieleistungen sowie eine belastbare Nebenkostenabrechnung.</p>
+            </div>
+          </div>
+          <div class="client-fit">
+            <article class="card fit-card">
+              <h4>Ausgangslage</h4>
+              <ul class="fit-list">
+                <li>Informationen liegen in getrennten Systemen, Tabellen und Chatverläufen.</li>
+                <li>Störungen und Wartung werden reaktiv statt priorisiert und datenbasiert bearbeitet.</li>
+                <li>Eigentümerkommunikation, Mieterkontakt und Dienstleistersteuerung sind zeitaufwändig, fehleranfällig und nicht synchron.</li>
+              </ul>
+            </article>
+            <article class="card deliverable">
+              <h4>Zielbild</h4>
+              <p>Eine integrierte Plattform, in der kaufmännische Prozesse, operative Ausführung und Gebäudedaten über klare Abläufe zusammenspielen.</p>
+              <ul>
+                <li>Ein zentraler Betriebsfluss statt isolierter Tools.</li>
+                <li>Saubere Verantwortlichkeiten zwischen Verwaltung, Leistungserbringung und Technik.</li>
+                <li>Neue Grundlage für Zusatzleistungen und Modernisierung.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="architecture" class="section">
+          <div class="section-head">
+            <div>
+              <h3>Zielmodell</h3>
+              <p>Die Zielarchitektur verbindet Objektführung, Wirtschaftlichkeit, Kommunikation und Gebäudedaten in einem integrierten Betriebsmodell.</p>
+            </div>
+          </div>
+          <div class="card architecture">
+            <div class="layer">
+              <div class="layer-badge">Ebene 1</div>
+              <div>
+                <h4>CRM</h4>
+                <p>Führt Leads, Betreuung, Eskalationen und Eigentümerentwicklung.</p>
+              </div>
+            </div>
+            <div class="layer">
+              <div class="layer-badge">Ebene 2</div>
+              <div>
+                <h4>Verwaltungsplattform</h4>
+                <p>Führt Objekte, Verträge, Tickets, Dokumente und Abrechnungen.</p>
+              </div>
+            </div>
+            <div class="layer">
+              <div class="layer-badge">Ebene 3</div>
+              <div>
+                <h4>ERP</h4>
+                <p>Steuert Lieferanten, Freigaben, Kostenstellen, Budgets und Rentabilität.</p>
+              </div>
+            </div>
+            <div class="layer">
+              <div class="layer-badge">Ebene 4</div>
+              <div>
+                <h4>Automation</h4>
+                <p>Übersetzt Ereignisse automatisch in Aufgaben, Benachrichtigungen und Folgeprozesse.</p>
+              </div>
+            </div>
+            <div class="layer">
+              <div class="layer-badge">Ebene 5</div>
+              <div>
+                <h4>IoT / Gebäudeautomation</h4>
+                <p>Bindet Heizung, Zähler, Leckage, PV und Wallboxen an und macht Zustandsdaten nutzbar.</p>
+              </div>
+            </div>
+            <div class="layer">
+              <div class="layer-badge">Ebene 6</div>
+              <div>
+                <h4>Portale</h4>
+                <p>Reduzierte Portale für Mieter, Eigentümer und Partner.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h3>Ergebnisse</h3>
+              <p>Weniger Reibung, mehr Steuerbarkeit, stärkere Eigentümerwirkung und zusätzliche Umsatzoptionen im Bestand.</p>
+            </div>
+          </div>
+          <div class="pillars">
+            <article class="pillar">
+              <h5>Weniger operative Reibung</h5>
+              <ul>
+                <li>Weniger Übergaben zwischen Systemen.</li>
+                <li>Klarere Statusführung über Teams hinweg.</li>
+                <li>Mehr Prozessautomatik in Vermietung, Störung und Abrechnung.</li>
+              </ul>
+            </article>
+            <article class="pillar">
+              <h5>Mehr Steuerbarkeit</h5>
+              <ul>
+                <li>Bessere Sicht auf Kosten, Dienstleister und Prozesse.</li>
+                <li>Führbare Leistungsniveaus statt reiner Dokumentation.</li>
+                <li>Belastbare Grundlage für Wachstum im Bestand.</li>
+                <li>Automatische Kalkulation und Erstellung der Nebenkostenabrechnung.</li>
+              </ul>
+            </article>
+            <article class="pillar">
+              <h5>Besseres Eigentümererlebnis</h5>
+              <ul>
+                <li>Professionellere Kommunikation und Berichte.</li>
+                <li>Mehr Transparenz zu Maßnahmen und Status.</li>
+                <li>Höhere Glaubwürdigkeit bei Modernisierung und Leistung.</li>
+              </ul>
+            </article>
+            <article class="pillar">
+              <h5>Neue Zusatzleistungen</h5>
+              <ul>
+                <li>Wartung, Energie und Modernisierung werden ausbaubar.</li>
+                <li>IoT wird vom Technikthema zum Geschäftshebel.</li>
+                <li>Neue Umsatzchancen für den Bestand.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="workflows" class="section">
+          <div class="section-head">
+            <div>
+              <h3>Pilotpfad über 4 Prozesse</h3>
+              <p>Vier priorisierte Prozesse zeigen den direkten Weg vom Start bis zum messbaren Betriebseffekt.</p>
+            </div>
+          </div>
+
+          <div class="workflow-controls" role="tablist" aria-label="Prozessauswahl">
+            <button type="button" class="chip active" data-workflow="vermietung" role="tab" aria-selected="true">01 · Vermietung & Start</button>
+            <button type="button" class="chip" data-workflow="stoerung" role="tab" aria-selected="false">02 · Störung & Reparatur</button>
+            <button type="button" class="chip" data-workflow="abrechnung" role="tab" aria-selected="false">03 · Abrechnung & Zahlung</button>
+            <button type="button" class="chip" data-workflow="energie" role="tab" aria-selected="false">04 · Energie & ESG</button>
+          </div>
+
+          <div class="workflow-panels">
+            <article class="card timeline">
+              <div id="workflow-title" class="section-head" style="margin-bottom:1rem">
+                <div>
+                  <h3 style="font-size:1.35rem">Vermietung & Start</h3>
+                  <p id="workflow-summary">CRM qualifiziert Anfragen, die Verwaltung führt Vertrags- und Einzugsprozess, ERP macht internen Aufwand sichtbar und IoT aktiviert technische Grundfunktionen.</p>
+                </div>
+              </div>
+              <div id="steps" class="steps"></div>
+            </article>
+            <aside class="workflow-side">
+              <div class="card mini-card">
+                <h5>Systeme im Einsatz</h5>
+                <ul id="systems-list"></ul>
+              </div>
+              <div class="card mini-card">
+                <h5>Automatisierungs-Auslöser</h5>
+                <ul id="trigger-list"></ul>
+              </div>
+              <div class="card mini-card">
+                <h5>Geschäftlicher Effekt</h5>
+                <p id="effect-text"></p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="roadmap" class="section">
+          <div class="section-head">
+            <div>
+              <h3>3 Schritte zum Einstieg</h3>
+              <p>Die Roadmap folgt drei Phasen: Beratung, Pilot und skalierbarer Betrieb.</p>
+            </div>
+          </div>
+          <div class="roadmap">
+            <article class="phase">
+              <div class="phase-num">1</div>
+              <h4>Strategieplanung</h4>
+              <p>Zielbild, Prozesspriorisierung und technische Architektur gemeinsam festlegen.</p>
+              <ul>
+                <li>Zielbetriebsmodell definieren.</li>
+                <li>Anwendungsfälle priorisieren.</li>
+                <li>Tool- und Integrationsbild festlegen.</li>
+              </ul>
+            </article>
+            <article class="phase">
+              <div class="phase-num">2</div>
+              <h4>Pilot</h4>
+              <p>Einen klar abgegrenzten Pilotbereich mit echten Prozessen und messbarem Nutzen umsetzen.</p>
+              <ul>
+                <li>CRM-, ERP- und Prozesslogik konfigurieren.</li>
+                <li>Ausgewählte Objekte oder Prozesse anbinden.</li>
+                <li>Berichte und operative Routinen etablieren.</li>
+                <li>Nebenkostenabrechnung digital und automatisiert aufsetzen.</li>
+              </ul>
+            </article>
+            <article class="phase">
+              <div class="phase-num">3</div>
+              <h4>Betrieb & Ausbau</h4>
+              <p>Den funktionierenden Pilot in ein wiederholbares Betriebsmodell überführen.</p>
+              <ul>
+                <li>Weitere Prozesse und Objekte anschließen.</li>
+                <li>Monitoring und Optimierung laufend betreiben.</li>
+                <li>Zusatzservices systematisch ausbauen.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="positioning" class="section">
+          <div class="section-head">
+            <div>
+              <h3>Angebot</h3>
+              <p>Ein klarer Einstieg, ein sichtbarer Pilot und ein strukturierter Übergang in den Regelbetrieb.</p>
+            </div>
+          </div>
+          <div class="engagement-grid">
+            <article class="card deliverable">
+              <h4>Einstiegsangebot</h4>
+              <p>Ein Strategieworkshop, der aus Ideen ein belastbares Zielbild und einen priorisierten Pilot macht.</p>
+              <ul>
+                <li>Architekturworkshop und Zielbetriebsmodell.</li>
+                <li>Priorisierte Anwendungsfälle mit klarem Nutzen.</li>
+                <li>Empfohlene Tool- und Integrationsarchitektur.</li>
+                <li>Sauber definierter Pilotumfang.</li>
+              </ul>
+            </article>
+            <article class="card deliverable">
+              <h4>Ausbaupfad</h4>
+              <p>Nach dem Einstieg folgt ein abgegrenzter Pilot und anschließend der laufende Betrieb als betreute Leistung.</p>
+              <ul>
+                <li>Implementierung von CRM-, ERP- und Prozesslogik.</li>
+                <li>IoT-Integration für ausgewählte Pilotobjekte.</li>
+                <li>Dashboards und Berichte für Eigentümer und Partnerunternehmen.</li>
+                <li>Laufende Optimierung und Bestandsausbau.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const workflowData = {
+      vermietung: {
+        number: '01',
+        title: 'Vermietung & Start',
+        summary: 'CRM qualifiziert Anfragen, die Verwaltung steuert Vertrag und Einzug, ERP macht Aufwand sichtbar und IoT aktiviert technische Grundfunktionen.',
+        systems: ['CRM', 'Hausverwaltungsplattform', 'ERP', 'Portal', 'IoT-Plattform'],
+        triggers: ['Neuer Lead', 'Einheit wird frei', 'Vertrag unterschrieben', 'Einzugstermin bestätigt'],
+        effect: 'Schnellerer Start, weniger Medienbrüche und sauber dokumentierte Übergaben mit technischem Ausgangspunkt für spätere Leistungen.',
+        steps: [
+          ['Lead qualifizieren', 'Anfragen von Eigentümer oder Mietinteressent werden im CRM eingeordnet und in den passenden Prozess übergeben.'],
+          ['Einheit vorbereiten', 'Die Verwaltung legt Einheit, Dokumente und Mietparameter an; parallel startet eine operative Checkliste für Übergabe und Aktivierung.'],
+          ['Vertrag und Freigaben', 'Kommunikation, Vorlagen und Freigaben laufen strukturiert; ERP hält Aufwand, Partnerkosten und interne Wirtschaftlichkeit fest.'],
+          ['Einzugsplanung', 'Schlüssel, Termine, Zählerstände, Portalzugänge und Willkommenskommunikation werden als Aufgabenpaket vorbereitet.'],
+          ['Technische Aktivierung', 'Sensoren, Heizprofile oder Grundkonfigurationen werden bei Bedarf im IoT-System aktiviert.'],
+          ['Leistungshistorie starten', 'Der neue Mieter startet mit einem vollständigen Datensatz für Kommunikation, Dokumente und spätere Servicevorgänge.']
+        ]
+      },
+      stoerung: {
+        number: '02',
+        title: 'Störung & Reparatur',
+        summary: 'Mieter oder Sensorik melden ein Ereignis, die Verwaltung priorisiert, ERP steuert Auftrag und Kosten, CRM sichert konsistente Kommunikation.',
+        systems: ['IoT/Sensorik', 'Mieterportal', 'Hausverwaltungsplattform', 'ERP', 'Dienstleisterzugang'],
+        triggers: ['Wasserleck erkannt', 'Störungsmeldung im Portal', 'SLA-Frist droht', 'Handwerker meldet Abschluss'],
+        effect: 'Kürzere Reaktionszeiten, geringere Schadensausweitung und sauber dokumentierte Vorgänge für Eigentümer, Versicherungen und Dienstleister.',
+        steps: [
+          ['Alarm oder Ticket', 'Sensorik oder Mieter lösen ein Ereignis aus; das System erstellt sofort einen Vorgang mit Objekt-, Zeit- und Prioritätsbezug.'],
+          ['Priorisierung', 'Regeln ordnen den Fall nach Dringlichkeit, Objektart und Reaktionszeit ein und schlagen die passende Bearbeitungsroute vor.'],
+          ['Auftragslogik im ERP', 'Dienstleister werden nach Verfügbarkeit, Preis und Freigaberegeln vorgeschlagen oder direkt disponiert.'],
+          ['Kommunikation sichern', 'Mieter und Eigentümer erhalten statusabhängige Informationen; Eskalationen werden sauber im CRM dokumentiert.'],
+          ['Leistung dokumentieren', 'Fotos, Zeiten, Materialien und Abschlussstatus fließen digital zurück in Ticket und ERP.'],
+          ['Abschluss und Prüfung', 'Rechnung, Kostenstelle, Objektakte und Leistungsbewertung aktualisieren sich auf derselben Datenbasis.']
+        ]
+      },
+      abrechnung: {
+        number: '03',
+        title: 'Abrechnung & Zahlung',
+        summary: 'Die Verwaltung steuert Miet- und Nebenkostenlogik, ERP ergänzt die interne Kontrolle, CRM unterstützt bei Rückständen und Klärungsfällen. Die Nebenkostenabrechnung läuft automatisiert.',
+        systems: ['Hausverwaltungsplattform', 'ERP', 'CRM', 'Portal', 'digitale Zähler'],
+        triggers: ['Mieteingang fehlt', 'Abrechnungsstichtag erreicht', 'Verbrauch weicht ab', 'Mahnstufe steigt', 'Nebenkostenabrechnung fällig'],
+        effect: 'Stabilerer Cashflow, nachvollziehbares Mahnwesen und klare Transparenz über Rentabilität und Risiko je Objekt inklusive automatisierter Nebenkostenabrechnung.',
+        steps: [
+          ['Zahlungserfassung', 'Eingänge werden importiert und automatisch den richtigen Einheiten und Vorgangsstatus zugeordnet.'],
+          ['Ausnahmen erkennen', 'Fehlende oder unplausible Zahlungen erzeugen Aufgaben, Wiedervorlagen und strukturierte Klärungspfade.'],
+          ['Mahnroutine steuern', 'CRM-gestützte Kommunikation sorgt für konsistente und dokumentierte Ansprache je Mahnstufe.'],
+          ['Nebenkosten kalkulieren', 'Digitale Verbräuche, Verteilerschlüssel und Vertragsdaten werden automatisch zusammengeführt und berechnet.'],
+          ['Nebenkosten verwalten', 'Korrekturen, Freigaben und Rückfragen werden je Einheit strukturiert geführt und dokumentiert.'],
+          ['Nebenkostenabrechnung erstellen', 'Abrechnungen werden automatisch erzeugt, bereitgestellt und revisionssicher abgelegt.'],
+          ['ERP-Controlling', 'Offene Forderungen, Prozessaufwand und Objektperformance werden kaufmännisch transparent auswertbar.'],
+          ['Portal und Archiv', 'Abrechnungen, Status und Dokumente werden revisionssicher bereitgestellt und abgelegt.']
+        ]
+      },
+      energie: {
+        number: '04',
+        title: 'Energie & ESG',
+        summary: 'IoT liefert Betriebsdaten, die Verwaltung schafft Transparenz, ERP bewertet Wirtschaftlichkeit und CRM entwickelt daraus Beratungs- und Ausbauchancen.',
+        systems: ['IoT/HEMS', 'PV/Wallbox', 'Hausverwaltung', 'ERP', 'CRM / Eigentümerbetreuung'],
+        triggers: ['Verbrauchsspitze erkannt', 'PV-Überschuss verfügbar', 'Energiebericht fällig', 'Eigentümer zeigt Interesse'],
+        effect: 'Niedrigere Betriebskosten, fundiertere Eigentümerkommunikation und eine belastbare Grundlage für neue Zusatzleistungen.',
+        steps: [
+          ['Daten erfassen', 'Zähler, Heizung, PV und Wallboxen liefern strukturierte Betriebs- und Verbrauchsdaten.'],
+          ['Abweichungen analysieren', 'Regeln oder KI-Logik erkennen ineffiziente Betriebszustände, Anomalien und Einsparpotenziale.'],
+          ['Maßnahmen ableiten', 'Optimierungen, Wartungsaufträge oder Investitionsvorschläge werden automatisch vorbereitet.'],
+          ['Wirtschaftlichkeit prüfen', 'ERP bewertet Kosten, Einsparpotenziale und Priorität pro Objekt oder Cluster.'],
+          ['Eigentümer beraten', 'CRM steuert Berichte, Gespräche und Folgeangebote für Modernisierung oder Energieleistungen.'],
+          ['Rollout standardisieren', 'Erfolgreiche Maßnahmen werden in den Regelbetrieb für weitere Objekte übernommen.']
+        ]
+      }
+    };
+
+    const chips = document.querySelectorAll('.chip');
+    const stepsEl = document.getElementById('steps');
+    const systemsEl = document.getElementById('systems-list');
+    const triggersEl = document.getElementById('trigger-list');
+    const effectEl = document.getElementById('effect-text');
+    const titleWrap = document.getElementById('workflow-title').querySelector('h3');
+    const summaryWrap = document.getElementById('workflow-summary');
+
+    function renderWorkflow(key) {
+      const data = workflowData[key];
+      titleWrap.textContent = `${data.number}. ${data.title}`;
+      summaryWrap.textContent = data.summary;
+      stepsEl.innerHTML = data.steps.map((step, index) => `
+        <div class="step">
+          <div class="step-index">${index + 1}</div>
+          <div>
+            <h5>${step[0]}</h5>
+            <p>${step[1]}</p>
+          </div>
+        </div>
+      `).join('');
+      systemsEl.innerHTML = data.systems.map((item) => `<li>${item}</li>`).join('');
+      triggersEl.innerHTML = data.triggers.map((item) => `<li>${item}</li>`).join('');
+      effectEl.textContent = data.effect;
+
+      chips.forEach((chip) => {
+        const active = chip.dataset.workflow === key;
+        chip.classList.toggle('active', active);
+        chip.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', (event) => {
+        event.preventDefault();
+        renderWorkflow(chip.dataset.workflow);
+      });
+    });
+    renderWorkflow('vermietung');
+
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    }, { rootMargin: '-28% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
