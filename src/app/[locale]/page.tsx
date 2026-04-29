@@ -96,10 +96,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
       </section>
+{/* 
+      /* <PitchDeckSection locale={locale} />
 
-      {/* <PitchDeckSection locale={locale} />
-
-      {/* Process & Trust */}
+      { Process & Trust
       <section className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading title={t.process.title} subtitle={t.process.subtitle} />
@@ -122,7 +122,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             ))}
           </div>
         </div>
-      </section> */}
+      </section> */ }
 
       {/* CTA */}
       <section className="py-20 sm:py-28 bg-primary-dark/50">
