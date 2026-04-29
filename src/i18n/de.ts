@@ -388,9 +388,9 @@ const de = {
       items: [
         { title: 'Lokal & persönlich', description: 'Vor Ort erreichbar, persönliche Betreuung statt anonyme Teams.' },
         { title: 'Implementierung inklusive', description: 'Wir beraten und bauen — keine Empfehlungen die dann jemand anders umsetzen muss.' },
-        { title: 'Privacy-first', description: 'Lokale KI-Modelle, kein Cloud-Zwang, DSGVO-konform by design.' },
+        { title: 'Privacy-first', description: 'Lokale KI-Modelle, kein Cloud-Zwang, DSGVO-konform.' },
         { title: 'KMU-gerecht', description: 'Lösungen ab €600 — nicht erst ab €50.000 wie bei großen Beratungshäusern.' },
-        { title: 'Open-Source-Stack', description: 'Keine Vendor-Locks, keine laufenden Lizenzkosten für proprietäre Plattformen.' },
+        { title: 'Open-Source-Stack', description: 'Keine Markenzwänge, keine laufenden Lizenzkosten für proprietäre Plattformen.' },
         { title: 'Home + Business', description: 'Einzigartige Kombination aus Smart-Home-Expertise und KI-Kompetenz.' },
       ],
     },
