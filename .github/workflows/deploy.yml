@@ -16,7 +16,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /opt/ilmtech.de
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd
             npm install --production=false
             npm run build
-            systemctl restart ilmtech
+            systemctl restart ilmtech.service
