@@ -18,7 +18,6 @@ const en: Dictionary = {
     aiWorkflow: 'Workflow Automation',
     aiInfrastruktur: 'AI Infrastructure',
     aiConsulting: 'AI Consulting',
-    pitches: 'Pitch Decks',
     about: 'About Us',
     contact: 'Contact',
     cta: 'Free Consultation',

@@ -99,14 +99,6 @@ export default function Header() {
               {t.aiServices}
             </Link>
             <Link
-              href={`/${locale}/pitches`}
-              className={`text-sm transition-colors duration-200 ${
-                pathname.startsWith(`/${locale}/pitches`) ? 'text-accent-blue' : 'text-text-muted hover:text-accent-blue'
-              }`}
-            >
-              {t.pitches}
-            </Link>
-            <Link
               href={`/${locale}/ueber-uns`}
               className="text-sm text-text-muted hover:text-accent-blue transition-colors duration-200"
             >
