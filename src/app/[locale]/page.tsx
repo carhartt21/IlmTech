@@ -17,6 +17,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const contactHint = isGerman
     ? 'Bei Interesse an einer frühen Abstimmung schreiben Sie uns gerne an info@ilmtech.de.'
     : 'If you would like an early discussion, feel free to reach out at info@ilmtech.de.';
+  const unlockTitle = isGerman ? 'Interner Zugriff' : 'Internal access';
+  const unlockSubtitle = isGerman
+    ? 'Mit Passwort erhalten autorisierte Personen Zugriff auf die vollständige Website.'
+    : 'Authorized users can access the full website using the password.';
+  const passwordLabel = isGerman ? 'Passwort' : 'Password';
+  const unlockButton = isGerman ? 'Website entsperren' : 'Unlock website';
 
   return (
     <section className="relative overflow-hidden min-h-[70vh] flex items-center">
@@ -40,6 +46,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <p className="mt-4 text-sm font-semibold tracking-widest uppercase text-accent-blue">{t.hero.tagline}</p>
         </div>
 
+        <div className="mt-12 sm:mt-16">
+          <HeroHouse />
+        </div>
+
         <div className="mt-10 max-w-3xl mx-auto rounded-2xl border border-white/10 bg-surface/40 p-6 sm:p-8 text-center">
           <h2 className="text-xl sm:text-2xl font-semibold text-white">{statusTitle}</h2>
           <p className="mt-3 text-text-muted">{statusBody}</p>
@@ -48,8 +58,30 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </p>
         </div>
 
-        <div className="mt-12 sm:mt-16">
-          <HeroHouse />
+        <div className="mt-8 max-w-xl mx-auto rounded-2xl border border-white/10 bg-surface/40 p-6 sm:p-8">
+          <h3 className="text-xl font-semibold text-white text-center">{unlockTitle}</h3>
+          <p className="mt-3 text-text-muted text-center">{unlockSubtitle}</p>
+
+          <form action="/api/unlock" method="post" className="mt-6 space-y-4">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="next" value={`/${locale}/leistungen`} />
+            <label className="block text-sm text-text-muted" htmlFor="landing-password">
+              {passwordLabel}
+            </label>
+            <input
+              id="landing-password"
+              name="password"
+              type="password"
+              required
+              className="w-full rounded-lg border border-white/10 bg-primary-dark px-4 py-3 text-white outline-none focus:ring-2 focus:ring-accent-blue/70"
+            />
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-accent-blue text-primary-dark font-semibold px-4 py-3 hover:opacity-90 transition-opacity"
+            >
+              {unlockButton}
+            </button>
+          </form>
         </div>
       </div>
     </section>
