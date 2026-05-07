@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Deployment Secrets
+
+The production deploy workflow writes `.env.local` on the server before building.
+Add these GitHub repository secrets:
+
+- `SSH_HOST`
+- `SSH_USER`
+- `SSH_PRIVATE_KEY`
+- `BREVO_API_KEY`
+- `ILMTECH_SITE_PASSWORD`
+
 ## Getting Started
 
 First, run the development server:

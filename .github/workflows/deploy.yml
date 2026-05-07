@@ -10,15 +10,26 @@ jobs:
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          ILMTECH_SITE_PASSWORD: ${{ secrets.ILMTECH_SITE_PASSWORD }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: BREVO_API_KEY,ILMTECH_SITE_PASSWORD
           script: |
             cd /opt/ilmtech.de
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
+            cat > .env.local <<EOF
+            BREVO_API_KEY=$BREVO_API_KEY
+            ILMTECH_SITE_PASSWORD=$ILMTECH_SITE_PASSWORD
+            EOF
             npm install --production=false
             npm run build
             systemctl restart ilmtech.service
+            systemctl is-active --quiet ilmtech.service
+            curl -fsS https://ilmtech.de/de > /dev/null
+            curl -sSI https://ilmtech.de/de/kontakt | grep -qi '^location: .*\/de\/unlock'

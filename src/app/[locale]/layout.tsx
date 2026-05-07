@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { locales, getDictionary, type Locale } from '@/i18n/config';
 import Header from '@/components/Header';
 import { SubNav } from '@/components/Header';
@@ -47,6 +48,10 @@ export default async function LocaleLayout({
   if (!locales.includes(locale as Locale)) notFound();
 
   const dict = await getDictionary(locale as Locale);
+  const configuredPassword = process.env.ILMTECH_SITE_PASSWORD;
+  const cookieStore = await cookies();
+  const accessCookie = cookieStore.get('ilmtech_site_access')?.value;
+  const isAuthenticated = configuredPassword ? accessCookie === configuredPassword : true;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -78,12 +83,12 @@ export default async function LocaleLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
-      <main id="main-content" className="flex-1 pt-16">
-        <SubNav />
+      {isAuthenticated ? <Header /> : null}
+      <main id="main-content" className={isAuthenticated ? 'flex-1 pt-16' : 'flex-1'}>
+        {isAuthenticated ? <SubNav /> : null}
         {children}
       </main>
-      <Footer />
+      {isAuthenticated ? <Footer /> : null}
     </I18nProvider>
   );
 }

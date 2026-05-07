@@ -4,18 +4,44 @@ import { locales, defaultLocale } from '@/i18n/config';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Skip static files and API routes that must stay public.
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api/unlock') ||
+    pathname.startsWith('/api') ||
+    pathname.includes('.')
+  ) {
+    return;
+  }
+
+  const configuredPassword = process.env.ILMTECH_SITE_PASSWORD;
+
   // Check if the pathname already has a locale prefix
   const hasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-  if (hasLocale) return;
 
-  // Skip static files and API routes
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.includes('.')
-  ) {
+  if (hasLocale) {
+    const locale = locales.find(
+      (candidate) => pathname === `/${candidate}` || pathname.startsWith(`/${candidate}/`)
+    );
+
+    if (!locale || !configuredPassword) {
+      return;
+    }
+
+    const isLanding = pathname === `/${locale}`;
+    const isUnlock = pathname === `/${locale}/unlock`;
+    const passwordCookie = request.cookies.get('ilmtech_site_access')?.value;
+    const isAuthenticated = passwordCookie === configuredPassword;
+
+    if (!isLanding && !isUnlock && !isAuthenticated) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${locale}/unlock`;
+      url.searchParams.set('next', pathname);
+      return NextResponse.redirect(url);
+    }
+
     return;
   }
 
@@ -36,5 +62,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api|favicon\\.ico|icon\\.svg|images).*)'],
+  matcher: ['/((?!_next|favicon\\.ico|icon\\.svg|images).*)'],
 };
