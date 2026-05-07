@@ -32,4 +32,4 @@ jobs:
             systemctl restart ilmtech.service
             systemctl is-active --quiet ilmtech.service
             curl -fsS -H 'Host: ilmtech.de' http://127.0.0.1/de > /dev/null
-            curl -sSI -H 'Host: ilmtech.de' http://127.0.0.1/de/kontakt | grep -qi '^location: .*\/de\/unlock'
+            curl -fsSL -H 'Host: ilmtech.de' http://127.0.0.1/de/kontakt | grep -Eqi 'Interner Zugriff|Internal Access'
