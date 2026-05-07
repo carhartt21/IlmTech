@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import HeroHouse from '@/components/HeroHouse';
 import HeroLogo from '@/components/HeroLogo';
 import { locales, getDictionary, type Locale } from '@/i18n/config';
 
@@ -45,6 +46,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <p className="mt-4 text-sm text-text-muted">
             {contactHint}
           </p>
+        </div>
+
+        <div className="mt-12 sm:mt-16">
+          <HeroHouse />
         </div>
       </div>
     </section>
