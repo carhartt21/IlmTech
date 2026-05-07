@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import HeroHouse from '@/components/HeroHouse';
 import HeroLogo from '@/components/HeroLogo';
+import { LockIcon } from '@/components/Icons';
 import { locales, getDictionary, type Locale } from '@/i18n/config';
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -58,31 +59,39 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </p>
         </div>
 
-        <div className="mt-8 max-w-xl mx-auto rounded-2xl border border-white/10 bg-surface/40 p-6 sm:p-8">
-          <h3 className="text-xl font-semibold text-white text-center">{unlockTitle}</h3>
-          <p className="mt-3 text-text-muted text-center">{unlockSubtitle}</p>
+        <details className="mt-8 max-w-xl mx-auto group">
+          <summary className="list-none cursor-pointer select-none rounded-full border border-white/10 bg-surface/40 px-5 py-3 flex items-center justify-center gap-3 text-text-muted hover:text-white hover:border-white/20 transition-colors">
+            <span className="text-accent-blue">
+              <LockIcon size={18} />
+            </span>
+            <span className="text-sm font-semibold">{unlockTitle}</span>
+          </summary>
 
-          <form action="/api/unlock" method="post" className="mt-6 space-y-4">
-            <input type="hidden" name="locale" value={locale} />
-            <input type="hidden" name="next" value={`/${locale}/leistungen`} />
-            <label className="block text-sm text-text-muted" htmlFor="landing-password">
-              {passwordLabel}
-            </label>
-            <input
-              id="landing-password"
-              name="password"
-              type="password"
-              required
-              className="w-full rounded-lg border border-white/10 bg-primary-dark px-4 py-3 text-white outline-none focus:ring-2 focus:ring-accent-blue/70"
-            />
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-accent-blue text-primary-dark font-semibold px-4 py-3 hover:opacity-90 transition-opacity"
-            >
-              {unlockButton}
-            </button>
-          </form>
-        </div>
+          <div className="mt-3 rounded-2xl border border-white/10 bg-surface/40 p-5 sm:p-6">
+            <p className="text-sm text-text-muted text-center">{unlockSubtitle}</p>
+
+            <form action="/api/unlock" method="post" className="mt-5 space-y-4">
+              <input type="hidden" name="locale" value={locale} />
+              <input type="hidden" name="next" value={`/${locale}/leistungen`} />
+              <label className="block text-sm text-text-muted" htmlFor="landing-password">
+                {passwordLabel}
+              </label>
+              <input
+                id="landing-password"
+                name="password"
+                type="password"
+                required
+                className="w-full rounded-lg border border-white/10 bg-primary-dark px-4 py-3 text-white outline-none focus:ring-2 focus:ring-accent-blue/70"
+              />
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-accent-blue text-primary-dark font-semibold px-4 py-3 hover:opacity-90 transition-opacity"
+              >
+                {unlockButton}
+              </button>
+            </form>
+          </div>
+        </details>
       </div>
     </section>
   );
